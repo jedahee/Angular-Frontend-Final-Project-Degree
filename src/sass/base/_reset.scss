@@ -1,0 +1,22 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    list-style: none;
+    text-decoration: none;
+    text-emphasis: none;
+    scroll-behavior: smooth;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+html, body {
+    background-color: $black;
+    color: $white;
+}
