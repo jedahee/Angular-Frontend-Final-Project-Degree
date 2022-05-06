@@ -1,0 +1,30 @@
+.arrow-back {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+
+.article-login {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.article-login > img {
+    margin-top: 3rem;
+}
+
+.article-login > section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    margin-bottom: 1rem;
+}
+
+.btn-primary {
+    margin-top: 1.5rem;
+}

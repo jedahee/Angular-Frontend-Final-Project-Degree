@@ -1,0 +1,15 @@
+.btn {
+    @include btn;
+}
+
+.btn-primary {
+    background-color: $blue;
+}
+
+.btn-error {
+    background-color: $error_red;
+}
+
+.btn-primary:hover {
+    background-color: $blue-hover;
+}

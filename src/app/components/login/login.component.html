@@ -1,0 +1,23 @@
+<div class="arrow-back"></div>
+<article class="article-login">
+    <img src="./assets/img/svgLogIn.svg">
+    <section>
+        <h1 class="title">LOG IN</h1>
+        <div>
+            <div class="input-container">
+                <input #input (blur)="activeAnimationInput()" id="email" class="input" type="text">
+                <label class="label-input" for="email">Email</label>
+            </div>
+            
+            <div class="fg-password-container">
+                <a class="link link-red" routerLink="forgot-password">¿Has olvidado tu contraseña?</a>
+                <div class="input-container">
+                    <input #input (blur)="activeAnimationInput()" id="password" class="input" type="password">
+                    <label class="label-input" for="password">Contraseña</label>
+                </div>
+            </div>
+        </div>
+        <input class="btn btn-primary" type="button" value="LOG IN">
+    </section>
+    <a class="link link-blue" routerLink="register">¿No tienes una cuenta todavía?</a>
+</article>
