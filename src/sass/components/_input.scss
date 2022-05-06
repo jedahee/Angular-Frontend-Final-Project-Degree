@@ -11,6 +11,7 @@
         color: $gray;
         background-color: $black;
         padding: 0 .3rem;
+        pointer-events: none;
         transition: transform .15s ease, color .3s ease;
     }
 

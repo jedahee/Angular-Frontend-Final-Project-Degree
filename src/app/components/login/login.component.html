@@ -2,22 +2,26 @@
 <article class="article-login">
     <img src="./assets/img/svgLogIn.svg">
     <section>
-        <h1 class="title">LOG IN</h1>
-        <div>
+        <h1 class="title">INICIAR SESIÓN</h1>
+        <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)">
             <div class="input-container">
-                <input #input (blur)="activeAnimationInput()" id="email" class="input" type="text">
+                <input #input required [(ngModel)]="user.email" email name="email" #email="ngModel" (blur)="activeAnimationInput()" id="email" class="input" type="text">
                 <label class="label-input" for="email">Email</label>
             </div>
-            
+            <span class="error-msg" [hidden]="email.valid || email.pristine">Este campo es obligatorio</span>
+            <span class="error-msg" [hidden]="email.errors?.email">Debe tener formato Email</span>
+
             <div class="fg-password-container">
-                <a class="link link-red" routerLink="forgot-password">¿Has olvidado tu contraseña?</a>
+                <a class="link-red" routerLink="forgot-password">¿Has olvidado tu contraseña?</a>
                 <div class="input-container">
-                    <input #input (blur)="activeAnimationInput()" id="password" class="input" type="password">
+                    <input #input required [(ngModel)]="user.password" minlength="6" maxlength="50" name="password" #password="ngModel" (blur)="activeAnimationInput()" id="password" class="input" type="password">
                     <label class="label-input" for="password">Contraseña</label>
                 </div>
+                <span class="error-msg" [hidden]="password.valid || password.pristine">Este campo es obligatorio</span>
+                <span class="error-msg" [hidden]="password.errors?.minlength || password.errors?.maxlength">Debe tener entre 6 y 50 caractéres</span>
             </div>
-        </div>
-        <input class="btn btn-primary" type="button" value="LOG IN">
+        </form>
+        <input class="btn btn-primary" type="submit" value="ENTRAR">
     </section>
     <a class="link link-blue" routerLink="register">¿No tienes una cuenta todavía?</a>
 </article>

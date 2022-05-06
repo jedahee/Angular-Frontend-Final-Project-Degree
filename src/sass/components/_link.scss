@@ -1,0 +1,23 @@
+.link {
+    color: $blue;
+    position: relative;
+}
+
+.link-red {
+    color: $error_red;
+}
+
+.link:hover::after {
+    width: 100%;
+}
+
+.link::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 1.5px;
+    background-color: currentColor;
+    margin-top: -2px;
+    position: absolute;
+    transition: width .2s ease;
+}

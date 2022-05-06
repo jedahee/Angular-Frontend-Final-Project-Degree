@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChildren, AfterViewInit, QueryList, Query } from '@angular/core';
+import { Component, OnInit, ViewChildren, AfterViewInit, QueryList } from '@angular/core';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-login',
@@ -7,6 +8,13 @@ import { Component, OnInit, ViewChildren, AfterViewInit, QueryList, Query } from
 })
 export class LoginComponent implements AfterViewInit {
   @ViewChildren('input') inputRef: QueryList<any> = <any>{};
+
+  // Hacer interfaz del usuario
+  // Crear objeto usuario para ngmodel del html
+  // Crear onsubmit
+  // Crear servicios
+
+  public user: User = <User>{};
 
   constructor() {
   }
