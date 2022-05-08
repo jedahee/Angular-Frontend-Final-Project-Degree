@@ -4,18 +4,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
 })
-export class LoginComponent implements AfterViewInit {
+export class RegisterComponent implements AfterViewInit {
   @ViewChildren('input') inputRef: QueryList<any> = <any>{};
   @ViewChildren('errorMsg') errorMsgRef: QueryList<any> = <any>{};
 
   public user: User = <User>{};
 
-  constructor(private rute: Router, private userService: UserService) {
-  }
+  constructor(private rute: Router, private userService: UserService) { }
 
   activeAnimationInput() {
     this.inputRef.forEach(input => {
@@ -31,9 +30,8 @@ export class LoginComponent implements AfterViewInit {
   }
 
   onSubmit(user: User): void {
-    this.userService.login(user.email, user.password).subscribe(datos => {
-      localStorage.setItem('token', datos.token);
-      this.rute.navigate(['/courts']);
+    this.userService.register(user.nombre, user.apellidos, user.email, user.password).subscribe(datos => {
+      this.rute.navigate(['/']);
     }, (error) => {
       this.errorMsgRef.forEach(errorMsg => {
         errorMsg.nativeElement.innerHTML = error.error.msg;
@@ -47,5 +45,4 @@ export class LoginComponent implements AfterViewInit {
       
     });
   }
-
 }

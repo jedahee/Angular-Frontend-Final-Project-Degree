@@ -1,6 +1,33 @@
 .arrow-back {
     z-index: 1;
-    width: 32px;
+    cursor: pointer;
     height: 32px;
-    background-image: url(../../assets/icon/corner-up-left.svg);
+    background-image: url(../../assets/icon/arrow-left.svg);
+    background-position: left;
+    background-repeat: no-repeat;
+    padding-left: 1.85rem;
+    text-align: start;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    transition: padding-left .2s ease;
+}
+
+.arrow-back::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: currentColor;
+    position: absolute;
+    bottom: 0;
+    transition: width .2s ease;
+} 
+
+.arrow-back:hover::after {
+    width: calc(100% - 2rem);
+}
+
+.arrow-back:hover {
+    padding-left: 2.1rem;
 }

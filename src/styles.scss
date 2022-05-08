@@ -16,8 +16,12 @@
 @import 'sass/components/input';
 @import 'sass/components/button';
 @import 'sass/components/link';
+@import 'sass/components/error-msg';
 
 // VIEWS
 @import 'sass/views/login';
+@import 'sass/views/register';
+@import 'sass/views/forgot-password';
+@import 'sass/views/404-page';
 
 // LAYOUT

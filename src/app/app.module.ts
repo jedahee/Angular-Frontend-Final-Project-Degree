@@ -7,15 +7,29 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
+import { CourtsComponent } from './components/courts/courts.component';
+import { FgpassComponent } from './components/fgpass/fgpass.component';
+import { RegisterComponent } from './components/register/register.component';
+import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { UpdatepasswordComponent } from './components/updatepassword/updatepassword.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    CourtsComponent,
+    FgpassComponent,
+    RegisterComponent,
+    PagenotfoundComponent,
+    UpdatepasswordComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    CommonModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

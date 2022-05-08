@@ -1,0 +1,41 @@
+<div routerLink="/courts" class="arrow-back">Entrar en anónimo</div>
+<span #errorMsg class="error-msg popup"></span>
+
+<article class="article-register">
+    <img src="./assets/img/svgRegister.svg">
+    <section>
+        <h1 class="title">CREAR CUENTA</h1>
+        <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm.value)">
+            <div class="input-container">
+                <input #input required maxlength="30" [(ngModel)]="user.nombre" name="nombre" #nombre="ngModel" (blur)="activeAnimationInput()" id="nombre" class="input" type="text">
+                <label class="label-input" for="nombre">Nombre</label>
+            </div>
+            <span class="error-msg" [hidden]="!nombre.errors?.['required'] || nombre.pristine">Este campo es obligatorio</span>
+            <span class="error-msg" [hidden]="!nombre.errors?.['maxlength']">No puede tener mas de 30 caractéres</span>
+
+            <div class="input-container">
+                <input #input required maxlength="60" [(ngModel)]="user.apellidos" name="apellidos" #apellidos="ngModel" (blur)="activeAnimationInput()" id="apellidos" class="input" type="text">
+                <label class="label-input" for="apellidos">Apellidos</label>
+            </div>
+            <span class="error-msg" [hidden]="!apellidos.errors?.['required'] || apellidos.pristine">Este campo es obligatorio</span>
+            <span class="error-msg" [hidden]="!apellidos.errors?.['maxlength']">No puede tener mas de 60 caractéres</span>
+            
+            <div class="input-container">
+                <input #input required email [(ngModel)]="user.email" name="email" #email="ngModel" (blur)="activeAnimationInput()" id="email" class="input" type="text">
+                <label class="label-input" for="email">Email</label>
+            </div>
+            <span class="error-msg" [hidden]="!email.errors?.['required'] || email.pristine">Este campo es obligatorio</span>
+            <span class="error-msg" [hidden]="!email.errors?.['email']">Debe tener formato Email</span>
+
+            <div class="input-container">
+                <input #input required [(ngModel)]="user.password" minlength="6" maxlength="50" name="password" #password="ngModel" (blur)="activeAnimationInput()" id="password" class="input" type="password">
+                <label class="label-input" for="password">Contraseña</label>
+            </div>
+            <span class="error-msg" [hidden]="!password.errors?.['required'] || password.pristine">Este campo es obligatorio</span>
+            <span class="error-msg" [hidden]="!password.errors?.['minlength'] && !password.errors?.['maxlength']">Debe tener entre 6 y 50 caractéres</span>
+            
+            <input class="btn btn-primary" type="submit" [disabled]="!registerForm.valid" value="CREAR CUENTA">
+        </form>
+    </section>
+    <a class="link link-blue" routerLink="/">¿Ya tienes una cuenta?</a>
+</article>

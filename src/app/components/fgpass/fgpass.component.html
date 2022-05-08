@@ -1,0 +1,22 @@
+
+
+<article class="article-fgpassw">
+    <div routerLink="/" class="arrow-back">Volver</div>
+    <span #errorMsg class="error-msg popup"></span>
+
+    <img src="./assets/img/svgForgotPassword.svg">
+    <section>
+        <h1 class="title">NUEVA CONTRASEÑA</h1>
+        <form #fgPasswForm="ngForm" (ngSubmit)="onSubmit(fgPasswForm.value)">
+           
+            <div class="input-container">
+                <input #input required email [(ngModel)]="user.email" name="email" #email="ngModel" (blur)="activeAnimationInput()" id="email" class="input" type="text">
+                <label class="label-input" for="email">Email</label>
+            </div>
+            <span class="error-msg" [hidden]="!email.errors?.['required'] || email.pristine">Este campo es obligatorio</span>
+            <span class="error-msg" [hidden]="!email.errors?.['email']">Debe tener formato Email</span>
+
+            <input class="btn btn-primary" type="submit" [disabled]="!fgPasswForm.valid" value="ENVIAR CORREO">
+        </form>
+    </section>
+</article>

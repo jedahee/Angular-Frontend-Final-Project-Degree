@@ -1,0 +1,24 @@
+.error-msg {
+    background-color: $error_red;
+    padding: .2rem .9rem;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    color: $bg_error_red;
+    text-align: start;
+}
+
+.popup {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) scale(1.3);
+    top: 20px;
+    opacity: 0;
+    text-align: center;
+    pointer-events: none;
+    transition: transform .2s ease, opacity .2s ease;
+}
+
+.popup-transition {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}

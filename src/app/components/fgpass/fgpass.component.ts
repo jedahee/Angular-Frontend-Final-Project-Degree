@@ -1,21 +1,20 @@
 import { Component, ViewChildren, AfterViewInit, QueryList } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-fgpass',
+  templateUrl: './fgpass.component.html',
+  styleUrls: ['./fgpass.component.scss']
 })
-export class LoginComponent implements AfterViewInit {
+export class FgpassComponent implements AfterViewInit {
   @ViewChildren('input') inputRef: QueryList<any> = <any>{};
   @ViewChildren('errorMsg') errorMsgRef: QueryList<any> = <any>{};
 
   public user: User = <User>{};
 
-  constructor(private rute: Router, private userService: UserService) {
-  }
+  constructor(private rute: Router, private userService: UserService) { }
 
   activeAnimationInput() {
     this.inputRef.forEach(input => {
@@ -31,9 +30,8 @@ export class LoginComponent implements AfterViewInit {
   }
 
   onSubmit(user: User): void {
-    this.userService.login(user.email, user.password).subscribe(datos => {
-      localStorage.setItem('token', datos.token);
-      this.rute.navigate(['/courts']);
+    this.userService.forgotPassword(user.email).subscribe(datos => {
+      console.log("correo enviado");
     }, (error) => {
       this.errorMsgRef.forEach(errorMsg => {
         errorMsg.nativeElement.innerHTML = error.error.msg;
