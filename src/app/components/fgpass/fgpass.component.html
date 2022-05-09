@@ -3,10 +3,11 @@
 <article class="article-fgpassw">
     <div routerLink="/" class="arrow-back">Volver</div>
     <span #errorMsg class="error-msg popup"></span>
+    <span #successMsg class="success-msg popup"></span>
 
     <img src="./assets/img/svgForgotPassword.svg">
     <section>
-        <h1 class="title">NUEVA CONTRASEÑA</h1>
+        <h1 class="title">CONTRASEÑA OLVIDADA</h1>
         <form #fgPasswForm="ngForm" (ngSubmit)="onSubmit(fgPasswForm.value)">
            
             <div class="input-container">

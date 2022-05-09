@@ -38,4 +38,11 @@ export class UserService {
   forgotPassword(email: string) {
     return this.http.get<any>(this.url + 'forgot-password/' + email);
   }
+
+  updatePassword(email: string, token: string, password: string) {
+    let data = {
+      password: password
+    }
+    return this.http.put<any>(this.url + 'update-password/' + email + "/" + token, data);
+  }
 }

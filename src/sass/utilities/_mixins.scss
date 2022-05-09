@@ -12,4 +12,12 @@
     font-size: 1rem;
     transition: background-color .15s ease;
     cursor: pointer;
-} 
+}
+
+// MSG
+@mixin msg {
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    text-align: start;
+    padding: .2rem .9rem;
+}

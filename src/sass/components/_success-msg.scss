@@ -1,0 +1,5 @@
+.success-msg {
+    @include msg;
+    background-color: $success_green;
+    color: $bg_success_green;
+}

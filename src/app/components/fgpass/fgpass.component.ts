@@ -11,6 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class FgpassComponent implements AfterViewInit {
   @ViewChildren('input') inputRef: QueryList<any> = <any>{};
   @ViewChildren('errorMsg') errorMsgRef: QueryList<any> = <any>{};
+  @ViewChildren('successMsg') successMsgRef: QueryList<any> = <any>{};
 
   public user: User = <User>{};
 
@@ -31,7 +32,15 @@ export class FgpassComponent implements AfterViewInit {
 
   onSubmit(user: User): void {
     this.userService.forgotPassword(user.email).subscribe(datos => {
-      console.log("correo enviado");
+      this.successMsgRef.forEach(successMsg => {
+        successMsg.nativeElement.innerHTML = "Reseteo de contraseña enviado a: <strong>"+user.email+"</strong>";
+
+        successMsg.nativeElement.classList.add('popup-transition');
+        setTimeout(() => {
+          successMsg.nativeElement.classList.remove('popup-transition');
+        }, 2500);
+        
+      });
     }, (error) => {
       this.errorMsgRef.forEach(errorMsg => {
         errorMsg.nativeElement.innerHTML = error.error.msg;

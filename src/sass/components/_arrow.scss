@@ -20,12 +20,12 @@
     height: 2px;
     background-color: currentColor;
     position: absolute;
-    bottom: 0;
+    bottom: 3px;
     transition: width .2s ease;
 } 
 
 .arrow-back:hover::after {
-    width: calc(100% - 2rem);
+    width: calc(100% - 2.1rem);
 }
 
 .arrow-back:hover {

@@ -9,7 +9,6 @@
 @import 'sass/base/reset';
 @import 'sass/base/typo';
 
-
 // COMPONENTS
 @import 'sass/components/arrow';
 @import 'sass/components/title';
@@ -17,11 +16,13 @@
 @import 'sass/components/button';
 @import 'sass/components/link';
 @import 'sass/components/error-msg';
+@import 'sass/components/success-msg';
 
 // VIEWS
 @import 'sass/views/login';
 @import 'sass/views/register';
 @import 'sass/views/forgot-password';
+@import 'sass/views/update-password';
 @import 'sass/views/404-page';
 
 // LAYOUT

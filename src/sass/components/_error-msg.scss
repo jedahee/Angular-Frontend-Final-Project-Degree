@@ -1,10 +1,7 @@
 .error-msg {
+    @include msg;
     background-color: $error_red;
-    padding: .2rem .9rem;
-    border-top-right-radius: 5px;
-    border-bottom-left-radius: 5px;
     color: $bg_error_red;
-    text-align: start;
 }
 
 .popup {

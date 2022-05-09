@@ -1,1 +1,68 @@
-<p>courts works!</p>
+<main class="main-courts">
+    <header class="header header-courts">
+        <section>
+            <div class="logout-icon"></div>
+            <div *ngIf="" class="bookings-icon"></div>
+        </section>
+
+        <div *ngIf="" class="profile-icon"></div>
+    </header>
+    <article class="article-courts">
+        <header>
+            <div class="filter-icon"></div>
+            <nav class="search">
+                <input type="text" class="input-search">
+                <div class="search-icon"></div>
+            </nav>
+
+            <section>
+                <div>
+                    <div class="select">
+                        <label for="">Floor</label>
+                        <select name="" id=""></select>
+                    </div>
+                    <div class="select">
+                        <label for="">Sport</label>
+                        <select name="" id=""></select>
+                    </div>
+                </div>
+                <div>
+                    <div class="checkbox">
+                        <label for="">Disponible</label>
+                        <input type="checkbox" name="" id="">
+                    </div>
+                    <div class="checkbox">
+                        <label for="">Campo abierto</label>
+                        <input type="checkbox" name="" id="">
+                    </div>
+                    <div class="checkbox">
+                        <label for="">Iluminación extra</label>
+                        <input type="checkbox" name="" id="">
+                    </div>
+                    <div class="time">
+                        <label for="">Hora inicio</label>
+                        <input type="time" name="" id="">
+                    </div>
+                    <div class="time">
+                        <label for="">Hora finalización</label>
+                        <input type="time" name="" id="">
+                    </div>
+                    <div class="number">
+                        <label for="">Aforo</label>
+                        <input type="number" name="" id="">
+                    </div>
+                </div>
+                <div class="range">
+                    <label class="label-range" for="">Precio por hora</label>
+                    <input class="input-range" type="range">
+                </div>
+            </section>
+        </header>
+
+        <section class="container-courts">
+            <div class="court-card">
+                <app-courtcard></app-courtcard>
+            </div>
+        </section>
+    </article>
+</main>

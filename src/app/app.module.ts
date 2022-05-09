@@ -12,6 +12,7 @@ import { FgpassComponent } from './components/fgpass/fgpass.component';
 import { RegisterComponent } from './components/register/register.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { UpdatepasswordComponent } from './components/updatepassword/updatepassword.component';
+import { CourtcardComponent } from './components/courtcard/courtcard.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { UpdatepasswordComponent } from './components/updatepassword/updatepassw
     FgpassComponent,
     RegisterComponent,
     PagenotfoundComponent,
-    UpdatepasswordComponent
+    UpdatepasswordComponent,
+    CourtcardComponent
   ],
   imports: [
     BrowserModule,
