@@ -1,51 +1,63 @@
 <main class="main-courts">
+    <span #errorMsg class="error-msg popup"></span>
     <header class="header header-courts">
         <section>
-            <div class="logout-icon"></div>
-            <div *ngIf="" class="bookings-icon"></div>
+            <div (click)="logout()" class="icon logout-icon"></div>
+            <div *ngIf="isLogged" class="icon bookings-icon"></div>
         </section>
 
-        <div *ngIf="" class="profile-icon"></div>
+        <div *ngIf="isLogged" class="icon profile-icon" #profileImg></div>
     </header>
     <article class="article-courts">
         <header>
-            <div class="filter-icon"></div>
-            <nav class="search">
-                <input type="text" class="input-search">
-                <div class="search-icon"></div>
-            </nav>
-
             <section>
+                <div class="icon filter-icon" (click)="showFilter()"></div>
+                <nav class="search">
+                    <input type="text" class="input-search">
+                    <div class="icon search-icon"></div>
+                </nav>
+            </section>
+
+            <section #filter class="hidden">
                 <div>
                     <div class="select">
-                        <label for="">Floor</label>
-                        <select name="" id=""></select>
+                        <label for="floor_select">Suelo</label>
+                        <select name="floor_select" id="floor_select">
+                            <option value="-1" selected>Cualquiera</option>
+                            <option *ngFor="let floor of floors" ngDefaultControl [(ngModel)]="floorSelected" [value]="floor.id">{{floor.nombre.charAt(0).toUpperCase() + floor.nombre.slice(1)}}</option>
+                        </select>
                     </div>
                     <div class="select">
-                        <label for="">Sport</label>
-                        <select name="" id=""></select>
+                        <label for="sport_select">Deporte</label>
+                        <select name="sport_select" id="sport_select">
+                            <option value="-1" selected>Cualquiera</option>
+                            <option *ngFor="let sport of sports" ngDefaultControl [(ngModel)]="sportSelected" [value]="sport.id">{{sport.nombre.charAt(0).toUpperCase() + sport.nombre.slice(1)}}</option>
+                        </select>
                     </div>
                 </div>
                 <div>
                     <div class="checkbox">
-                        <label for="">Disponible</label>
-                        <input type="checkbox" name="" id="">
-                    </div>
-                    <div class="checkbox">
-                        <label for="">Campo abierto</label>
-                        <input type="checkbox" name="" id="">
-                    </div>
-                    <div class="checkbox">
-                        <label for="">Iluminación extra</label>
-                        <input type="checkbox" name="" id="">
+                        <label for="available">Disponible</label>
+                        <input type="checkbox" name="ch" id="available">
+                        <label class="real-checkbox" for="available"></label>
                     </div>
                     <div class="time">
                         <label for="">Hora inicio</label>
                         <input type="time" name="" id="">
                     </div>
+                    <div class="checkbox">
+                        <label for="outdoor">Campo ab.</label>
+                        <input type="checkbox" name="ch" id="outdoor">
+                        <label class="real-checkbox" for="outdoor"></label>
+                    </div>
                     <div class="time">
-                        <label for="">Hora finalización</label>
+                        <label for="">Hora fin</label>
                         <input type="time" name="" id="">
+                    </div>
+                    <div class="checkbox">
+                        <label for="light">Iluminación</label>
+                        <input type="checkbox" name="ch" id="light">
+                        <label class="real-checkbox" for="light"></label>
                     </div>
                     <div class="number">
                         <label for="">Aforo</label>
@@ -54,7 +66,10 @@
                 </div>
                 <div class="range">
                     <label class="label-range" for="">Precio por hora</label>
-                    <input class="input-range" type="range">
+                    <div>
+                        <input class="input-range" [max]="" [min]="" [value]="0" type="range">
+                        <span class="price">2€</span>
+                    </div>
                 </div>
             </section>
         </header>

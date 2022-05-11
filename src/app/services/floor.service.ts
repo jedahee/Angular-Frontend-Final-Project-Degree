@@ -5,13 +5,13 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class CourtService {
+export class FloorService {
 
   public url: string = environment.API_URL;
 
   constructor(private http: HttpClient) { }
 
-  getCourts() {
-    return this.http.get<any>(this.url + 'get-courts');
+  getFloors() {
+    return this.http.get<any>(this.url + 'get-floors');
   }
 }

@@ -45,4 +45,18 @@ export class UserService {
     }
     return this.http.put<any>(this.url + 'update-password/' + email + "/" + token, data);
   }
+
+  getUser(token: string) {
+    let data = {
+      token: token
+    }
+    return this.http.post<any>(this.url + 'get-user', data);
+  }
+
+  logout(token: string) {
+    let data = {
+      token: token
+    }
+    return this.http.post<any>(this.url + 'logout', data);
+  }
 }

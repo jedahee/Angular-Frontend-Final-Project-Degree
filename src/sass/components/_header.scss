@@ -1,0 +1,23 @@
+.header {
+    background-color: $gray;
+    width: 100%;
+    padding: 1rem;
+    height: max-content;
+    display: flex;
+    justify-content: space-between;
+
+    section {
+        display: flex;
+
+        div {
+            margin: 0 .3rem;
+        }
+    }
+
+    .icon {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+

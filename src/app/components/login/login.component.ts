@@ -32,7 +32,7 @@ export class LoginComponent implements AfterViewInit {
 
   onSubmit(user: User): void {
     this.userService.login(user.email, user.password).subscribe(datos => {
-      localStorage.setItem('token', datos.token);
+      localStorage.setItem('token_gestion_pistas', datos.token);
       this.rute.navigate(['/courts']);
     }, (error) => {
       this.errorMsgRef.forEach(errorMsg => {
