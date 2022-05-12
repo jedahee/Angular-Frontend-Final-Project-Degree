@@ -182,8 +182,16 @@
 
 .time > input {
     cursor: pointer;
+
+    &:disabled {
+        opacity: .5;    
+    }
 }
 
 .number {
     grid-template-columns: 50% 50%;
+
+    &>input:disabled {
+        opacity: .5;
+    }
 }

@@ -6,14 +6,14 @@
             <div *ngIf="isLogged" class="icon bookings-icon"></div>
         </section>
 
-        <div *ngIf="isLogged" class="icon profile-icon" #profileImg></div>
+        <div #profileImg *ngIf="isLogged" class="icon profile-icon"></div>
     </header>
     <article class="article-courts">
         <header>
             <section>
                 <div class="icon filter-icon" (click)="showFilter()"></div>
                 <nav class="search">
-                    <input type="text" class="input-search">
+                    <input [(ngModel)]="court.nombre" type="text" class="input-search" (keypress)="returnCourtsFilteredByName()">
                     <div class="icon search-icon"></div>
                 </nav>
             </section>
@@ -22,60 +22,58 @@
                 <div>
                     <div class="select">
                         <label for="floor_select">Suelo</label>
-                        <select name="floor_select" id="floor_select">
-                            <option value="-1" selected>Cualquiera</option>
-                            <option *ngFor="let floor of floors" ngDefaultControl [(ngModel)]="floorSelected" [value]="floor.id">{{floor.nombre.charAt(0).toUpperCase() + floor.nombre.slice(1)}}</option>
+                        <select [(ngModel)]="court.suelo_id" (change)="returnCourtsFiltered()" [(ngModel)]="court.suelo_id" name="floor_select" id="floor_select">
+                            <option *ngFor="let floor of floors" ngDefaultControl [value]="floor.id">{{floor.nombre.charAt(0).toUpperCase() + floor.nombre.slice(1)}}</option>
                         </select>
                     </div>
                     <div class="select">
                         <label for="sport_select">Deporte</label>
-                        <select name="sport_select" id="sport_select">
-                            <option value="-1" selected>Cualquiera</option>
-                            <option *ngFor="let sport of sports" ngDefaultControl [(ngModel)]="sportSelected" [value]="sport.id">{{sport.nombre.charAt(0).toUpperCase() + sport.nombre.slice(1)}}</option>
+                        <select [(ngModel)]="court.deporte_id" (change)="returnCourtsFiltered()" [(ngModel)]="court.deporte_id" name="sport_select" id="sport_select">
+                            <option *ngFor="let sport of sports" ngDefaultControl [value]="sport.id">{{sport.nombre.charAt(0).toUpperCase() + sport.nombre.slice(1)}}</option>
                         </select>
                     </div>
                 </div>
                 <div>
                     <div class="checkbox">
                         <label for="available">Disponible</label>
-                        <input type="checkbox" name="ch" id="available">
+                        <input [(ngModel)]="court.disponible" (change)="returnCourtsFiltered()" type="checkbox" name="ch" id="available">
                         <label class="real-checkbox" for="available"></label>
                     </div>
                     <div class="time">
-                        <label for="">Hora inicio</label>
-                        <input type="time" name="" id="">
+                        <label>Hora inicio</label>
+                        <input #horaInicio [(ngModel)]="court.horaInicio" (keyup)="disableInputs()" (change)="returnCourtsFiltered()" type="time">
                     </div>
                     <div class="checkbox">
                         <label for="outdoor">Campo ab.</label>
-                        <input type="checkbox" name="ch" id="outdoor">
+                        <input [(ngModel)]="court.campoAbierto" (change)="returnCourtsFiltered()" type="checkbox" name="ch" id="outdoor">
                         <label class="real-checkbox" for="outdoor"></label>
                     </div>
                     <div class="time">
-                        <label for="">Hora fin</label>
-                        <input type="time" name="" id="">
+                        <label>Hora fin</label>
+                        <input #horaFin [(ngModel)]="court.horaFinalizacion" (keyup)="disableInputs()" (change)="returnCourtsFiltered()" type="time">
                     </div>
                     <div class="checkbox">
                         <label for="light">Iluminación</label>
-                        <input type="checkbox" name="ch" id="light">
+                        <input [(ngModel)]="court.iluminacion" (change)="returnCourtsFiltered()" type="checkbox" name="ch" id="light">
                         <label class="real-checkbox" for="light"></label>
                     </div>
                     <div class="number">
-                        <label for="">Aforo</label>
-                        <input type="number" name="" id="">
+                        <label>Aforo</label>
+                        <input #aforo [(ngModel)]="court.aforo" (keyup)="disableInputs()" (change)="returnCourtsFiltered()" type="number">
                     </div>
                 </div>
                 <div class="range">
                     <label class="label-range" for="">Precio por hora</label>
                     <div>
-                        <input class="input-range" [max]="" [min]="" [value]="0" type="range">
-                        <span class="price">2€</span>
+                        <input [(ngModel)]="court.precioPorHora" (change)="returnCourtsFiltered()" (input)="refreshPrice()" class="input-range" [min]="0" [max]="calculateMaxPrice()" [value]="0" type="range">
+                        <span #price ngDefaultControl class="price">0 <span>€</span></span>
                     </div>
                 </div>
             </section>
         </header>
 
         <section class="container-courts">
-            <div class="court-card">
+            <div class="court-card" *ngFor="let court of courtsFiltered">
                 <app-courtcard></app-courtcard>
             </div>
         </section>

@@ -1,2 +1,15 @@
 export interface Court {
+    id: 1,
+    nombre: string,
+    horaFinalizacion?: string,
+    horaInicio?: string,
+    aforo?: number,
+    direccion: string,
+    rutaImagen?: string,
+    precioPorHora: number,
+    campoAbierto: boolean,
+    disponible: boolean,
+    iluminacion: boolean,
+    deporte_id: number,
+    suelo_id: number,
 }
