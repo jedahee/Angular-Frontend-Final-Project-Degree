@@ -1,0 +1,74 @@
+.option-court-icon {
+    position: absolute;
+    top: 26px;
+    right: 20px;
+    z-index: 2;
+}
+
+.content-court-card {
+    
+    .title-court {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 80%;
+        z-index: 1;
+    }
+
+    .status {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        width: 80%;
+        left: 20px;
+        bottom: 30px;
+        z-index: 1;
+
+        .circle {
+            margin-right: 10px;
+        }
+        
+    }
+
+    .price-per-hour {
+        position: absolute;
+        width: 80%;
+        left: 20px;
+        bottom: 8px;
+        opacity: .5;
+        font-size: .9em;
+        z-index: 1;
+    }
+}
+
+.bg-show-court-icon {
+    position: absolute;
+    z-index: 1;
+    bottom: -20px;
+    right: -20px;
+    background-color: $blue;
+    width: 70px;
+    height: 70px;
+    border-top-left-radius: 30px;
+    cursor: pointer;
+    transition: bottom .2s ease, right .2s ease;
+
+    .show-court-icon {
+        position: absolute;    
+        top: 13px;
+        left: 13px;
+        transition: top .2s ease, left .2s ease;
+
+    }
+}
+
+.court-card:hover .bg-show-court-icon, .court-card:focus .bg-show-court-icon {
+    bottom: -10px;
+    right: -10px;
+    
+    .show-court-icon {
+        position: absolute;    
+        top: 20px;
+        left: 20px;
+    }
+}

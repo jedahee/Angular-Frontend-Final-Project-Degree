@@ -23,7 +23,8 @@ export class CourtsComponent implements AfterViewInit, AfterViewChecked  {
   @ViewChild('horaInicio') horaInicio: ElementRef = <ElementRef>{};
   @ViewChild('horaFin') horaFin: ElementRef = <ElementRef>{};
   @ViewChild('aforo') aforo: ElementRef = <ElementRef>{};
-
+  @ViewChild('aside') aside: ElementRef = <ElementRef>{};
+  
   public courts: Court[] = [];
   public courtsFiltered: any[] = [];
   public courtsFilteredByName: any[] = [];
@@ -34,6 +35,7 @@ export class CourtsComponent implements AfterViewInit, AfterViewChecked  {
   public court: Court = <Court>{};
   public token_user: string|null = "";
   public isLogged: boolean = false;
+  public error: any;
   
 
   constructor(private actRoute: ActivatedRoute, private rute: Router, private userserv: UserService, private courtserv: CourtService, private floorserv: FloorService, private sportserv: SportService) {
@@ -59,7 +61,7 @@ export class CourtsComponent implements AfterViewInit, AfterViewChecked  {
   ngAfterViewInit (): void {
     
     if (this.token_user != null) {
-            this.userserv.getUser(this.token_user).subscribe(datos => {
+      this.userserv.getUser(this.token_user).subscribe(datos => {
         this.isLogged = true;
         this.user = datos.user;
 
@@ -81,7 +83,7 @@ export class CourtsComponent implements AfterViewInit, AfterViewChecked  {
       if (this.user.rutaImagen == null) {
         this.profileImg.nativeElement.style.backgroundImage = "url(../../../assets/img/DefaultUserImg.svg)";
       } else {
-        this.profileImg.nativeElement.style.backgroundImage = "url("+ this.user.rutaImagen +")";
+        this.profileImg.nativeElement.style.backgroundImage = "url(" + 'http://127.0.0.1:8000/images/user/' + this.user.rutaImagen.split('/')[3]  +")";
       }
     }
   }
@@ -109,20 +111,33 @@ export class CourtsComponent implements AfterViewInit, AfterViewChecked  {
     this.rute.navigate(["/"]);
   }
 
+  showHideAside() {
+    this.aside.nativeElement.classList.toggle('container-bookings-active');
+  }
+
   refreshPrice() {
     this.price.nativeElement.innerHTML = this.court.precioPorHora + " <span>€</span>";
   }
 
   showFilter() {
     this.filter.nativeElement.classList.toggle('hidden');
+    if (this.filter.nativeElement.classList.value == 'hidden') {
+    }
   }
 
   returnCourtsFilteredByName() {
-    this.courtsFilteredByName = this.courts.filter(court => {
-      return court.nombre.indexOf(this.court.nombre) != -1;
-    });
+    if (this.court.nombre != "") {
+      this.courtsFilteredByName = this.courts.filter(court => {
+        return court.nombre.toLocaleLowerCase().indexOf(this.court.nombre.toLocaleLowerCase()) != -1;
+      });
+      
+      this.courtsFiltered=this.courtsFilteredByName;
+    } else
+      this.courtsFiltered = this.courts;
+    
 
-    this.courtsFiltered=this.courtsFilteredByName;
+    
+    
   }
   
   returnCourtsFiltered() {
@@ -138,7 +153,9 @@ export class CourtsComponent implements AfterViewInit, AfterViewChecked  {
                     if ((court.horaInicio != null && this.court.horaInicio != undefined && new Date('1/1/1990 ' + this.court.horaInicio) <= new Date('1/1/1990 ' + court.horaInicio)) || (this.court.horaInicio == undefined))
                       if ((court.horaFinalizacion != null && this.court.horaFinalizacion != undefined && new Date('1/1/1990 ' + this.court.horaFinalizacion) >= new Date('1/1/1990 ' + court.horaFinalizacion)) || (this.court.horaFinalizacion == undefined))
                         this.courtsFiltered.push(court);
-    });    
+    });
+
+    this.disableInputs();
   }
 
   calculateMaxPrice() {

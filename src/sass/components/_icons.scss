@@ -23,4 +23,18 @@
 
 .profile-icon {
     border-radius: 50%;
+    outline: 2px solid $blue;
+    outline-offset: 3px;
+}
+
+.option-court-icon {
+    background-image: url(../../assets/icon/settingsCourt.svg);  
+}
+
+.show-court-icon {
+    background-image: url(../../assets/icon/arrow-right.svg);
+}
+
+.close-icon {
+    background-image: url(../../assets/icon/x.svg);
 }

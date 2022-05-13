@@ -3,17 +3,17 @@
     <header class="header header-courts">
         <section>
             <div (click)="logout()" class="icon logout-icon"></div>
-            <div *ngIf="isLogged" class="icon bookings-icon"></div>
+            <div *ngIf="isLogged" (click)="showHideAside()" class="icon bookings-icon"></div>
         </section>
 
-        <div #profileImg *ngIf="isLogged" class="icon profile-icon"></div>
+        <div #profileImg routerLink="/details-user/{{user.id}}" *ngIf="isLogged" class="icon profile-icon"></div>
     </header>
     <article class="article-courts">
         <header>
             <section>
                 <div class="icon filter-icon" (click)="showFilter()"></div>
                 <nav class="search">
-                    <input [(ngModel)]="court.nombre" type="text" class="input-search" (keypress)="returnCourtsFilteredByName()">
+                    <input [(ngModel)]="court.nombre" type="text" class="input-search" (keyup)="returnCourtsFilteredByName()">
                     <div class="icon search-icon"></div>
                 </nav>
             </section>
@@ -72,9 +72,29 @@
             </section>
         </header>
 
+        <aside #aside class="container-bookings">
+            <div class="icon close-icon" (click)="showHideAside()"></div>
+            <section class="reserve">
+                <div>
+                    <span class="name">PISTA VILLAVERDE</span>
+                    <div class="circle"></div>
+                </div>
+                
+                <div>
+                    <div class="date">20 de marzo de 2022</div>
+                    <div class="detail-bookins">Nº 13 de 30</div>
+                </div>
+
+                <div class="bg-show-court-icon" routerLink="/details-court/">
+                    <div class="icon show-court-icon"></div>
+                </div>
+            </section>
+        </aside>
+
         <section class="container-courts">
             <div class="court-card" *ngFor="let court of courtsFiltered">
-                <app-courtcard></app-courtcard>
+                <img src="{{ 'http://127.0.0.1:8000/images/court/' + court.rutaImagen.split('/')[3] }}">
+                <app-courtcard [court]="court" [rol_id]="user.rol_id"></app-courtcard>
             </div>
         </section>
     </article>

@@ -1,0 +1,14 @@
+.circle {
+    height: 8px;
+    width: 8px;
+    
+    border-radius: 50%;
+}
+
+.circle-active {
+    background-color: $success_green;
+}
+
+.circle-disabled {
+    background-color: $error_red;
+}

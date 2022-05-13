@@ -13,6 +13,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { UpdatepasswordComponent } from './components/updatepassword/updatepassword.component';
 import { CourtcardComponent } from './components/courtcard/courtcard.component';
+import { DetailsuserComponent } from './components/detailsuser/detailsuser.component';
+import { DetailscourtComponent } from './components/detailscourt/detailscourt.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { CourtcardComponent } from './components/courtcard/courtcard.component';
     RegisterComponent,
     PagenotfoundComponent,
     UpdatepasswordComponent,
-    CourtcardComponent
+    CourtcardComponent,
+    DetailsuserComponent,
+    DetailscourtComponent,
   ],
   imports: [
     BrowserModule,

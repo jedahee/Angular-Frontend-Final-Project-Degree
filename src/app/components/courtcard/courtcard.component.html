@@ -1,1 +1,16 @@
-<p>courtcard works!</p>
+<div class="icon option-court-icon" *ngIf="rol_id == 1"></div>
+
+<section class="content-court-card">
+    <h1 class="title-court">{{court.nombre}}</h1>
+    <div class="status">
+        <div class="circle {{court.disponible ? 'circle-active' : 'circle-disabled'}}"></div>
+        <span>{{ court.disponible ? "Disponible" : "No disponible" }}</span>
+    </div>
+    <span class="price-per-hour">
+        {{court.precioPorHora}}€ / h
+    </span>
+</section>
+
+<div class="bg-show-court-icon" routerLink="/details-court/{{court.id}}">
+    <div class="icon show-court-icon"></div>
+</div>

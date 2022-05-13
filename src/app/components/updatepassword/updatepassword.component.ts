@@ -45,7 +45,8 @@ export class UpdatepasswordComponent implements AfterViewInit, OnInit {
         successMsg.nativeElement.classList.add('popup-transition');
         setTimeout(() => {
           successMsg.nativeElement.classList.remove('popup-transition');
-        }, 2500);
+          this.rute.navigate(['/']);
+        }, 1500);
         
       });
     }, (error) => {
