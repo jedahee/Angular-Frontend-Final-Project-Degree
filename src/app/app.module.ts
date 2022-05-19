@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -15,6 +15,8 @@ import { UpdatepasswordComponent } from './components/updatepassword/updatepassw
 import { CourtcardComponent } from './components/courtcard/courtcard.component';
 import { DetailsuserComponent } from './components/detailsuser/detailsuser.component';
 import { DetailscourtComponent } from './components/detailscourt/detailscourt.component';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { CommentsComponent } from './components/comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { DetailscourtComponent } from './components/detailscourt/detailscourt.co
     CourtcardComponent,
     DetailsuserComponent,
     DetailscourtComponent,
+    CommentsComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,13 @@ import { DetailscourtComponent } from './components/detailscourt/detailscourt.co
     HttpClientModule,
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

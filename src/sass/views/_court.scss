@@ -41,7 +41,7 @@
 
             & > section:nth-child(2) {
                 transition: transform .5s ease, opacity .2s ease, border-radius 1s ease;
-                z-index: 2;
+                z-index: 3;
                 position: fixed;
                 bottom: 0px;
                 left: 0px;
@@ -53,7 +53,6 @@
                 flex-direction: column;
                 justify-content: space-between;
                 align-items: center;
-
 
                 & > div:nth-child(1) {
                     width: 100%;

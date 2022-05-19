@@ -1,0 +1,208 @@
+.error-msg {
+    z-index: 6;
+}
+
+.success-msg {
+    z-index: 6;
+}
+
+.add-margin {
+    margin-top: 8rem;
+}
+
+.article-details-user {
+    margin-top: 3.5rem;
+    padding: 0 1.5rem;
+
+    & >  .select-role-user-container {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background-color: $gray;
+        border-radius: 10px;
+        overflow: hidden;
+
+        & > .role {
+            text-align: center;
+            border-bottom: 1.5px solid $white;
+            margin: .1rem;
+            padding: .2rem .4rem;
+            transition: background-color .2s ease;
+        }
+
+        & > .role:last-child {
+            border-bottom: none;
+        }
+
+        & > .role:hover, & > .role:focus {
+            background-color: $blue-hover;
+        }
+    }
+
+    & > .sect-1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+        & > form:nth-child(1) {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin: auto;
+
+            & > .upload-img-container {
+                margin: auto;
+
+                #upload-img {
+                    width: 0;
+                    height: 0;
+                    display: none;
+                }
+    
+                .upload-img-label {
+                    width: 172px;
+                    height: 172px;
+                    margin: .5rem 1rem;
+                    position: relative;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    overflow: hidden;
+                    cursor: pointer;
+    
+                    .img-user {
+                        
+                        height: 100%;
+                    }
+
+                    .animation {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        transform: translateY(100%);
+                        background-image: url(../../assets/img/upload.png);
+                        background-position: center;
+                        background-size: 100px;
+                        z-index: 1;
+                        opacity: .8;
+                        background-repeat: no-repeat;
+                        transition: transform .4s ease;
+                    }
+    
+                    &:hover > .animation {
+                        transform: translateY(0);
+                    }
+                }
+            }
+
+            .link-red {
+                margin: auto;     
+            }
+
+            .fullname {
+                display: grid;
+                grid-template-columns: 40% 60%;
+                
+                input {
+                    margin: .5rem .2rem;
+                    transition: opacity .2s ease;
+                }
+
+                input:read-only {
+                    opacity: .5;
+                }
+
+                .span-2 {
+                    grid-column: span 2;
+                }
+
+                .error-msg {
+                    margin-bottom: .5rem;
+                }
+            }
+
+            .email-container {
+                display: grid;
+                grid-template-columns: 100%;
+                
+                .email {
+                    font-size: 1em;
+                    transition: opacity .2s ease;
+                    margin-bottom: .5rem;
+                }
+
+                .email:read-only {
+                    opacity: .5;
+                }
+
+            }
+
+            & > .btn {
+                margin-top: 1rem;
+            }
+        }
+    }
+
+    & > .sect-2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: 1rem;
+
+        .text-warnings {
+            text-align: start;
+            align-self: flex-start;
+
+            .num-warnings {
+                color: $error_red;
+                font-size: 1.3em;
+                font-weight: 400;
+            }
+        }
+        
+        .warnings-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            
+            input {
+                margin: .35rem 0;
+            }
+        }
+
+    }
+
+    & > .sect-3 {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+        * {
+            margin: .35rem 0;
+        }
+
+        .btn-error {
+            width: 100%;
+        }
+    }
+    
+}
+
+.role-text {
+    text-align: start;
+    opacity: .6;
+    font-size: .9em;
+    margin: 1rem 0;
+    margin-left: -5px;
+}
+
+.icon-edit-user {
+    background-size: 18px;
+    align-self: flex-end;
+    height: 20px;
+}

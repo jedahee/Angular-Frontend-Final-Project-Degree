@@ -5,6 +5,7 @@ export interface User {
     email: string,
     password: string,
     rutaImagen?: any,
+    foto_perfil?: File,
     numAdvertencias?: number,
     adv1?: number,
     adv2?: number,

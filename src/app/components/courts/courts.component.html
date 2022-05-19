@@ -59,7 +59,7 @@
                     </div>
                     <div class="number">
                         <label>Aforo</label>
-                        <input #aforo [(ngModel)]="court.aforo" (keyup)="disableInputs()" (change)="returnCourtsFiltered()" type="number">
+                        <input #aforo [(ngModel)]="court.aforo" (keyup)="disableInputs()" (change)="returnCourtsFiltered()" [min]="0" [max]="9999" type="number">
                     </div>
                 </div>
                 <div class="range">
@@ -74,20 +74,25 @@
 
         <aside #aside class="container-bookings">
             <div class="icon close-icon" (click)="showHideAside()"></div>
-            <section class="reserve">
+            <span class="empty_reserve" *ngIf="emptyBookings != ''">{{emptyBookings}}</span>
+            <section *ngFor="let reserve of bookings" class="reserve">
                 <div>
-                    <span class="name">PISTA VILLAVERDE</span>
-                    <div class="circle"></div>
+                    <span class="name">
+                        {{reserve.nombre_pista}}
+                    </span>
+                    <div class="circle {{reserve.pista_activa ? 'circle-active' : 'circle-disabled'}}"></div>
                 </div>
-                
                 <div>
-                    <div class="date">20 de marzo de 2022</div>
-                    <div class="detail-bookins">Nº 13 de 30</div>
+                    <div class="date">{{ reserve.fechaCita | date:'dd/MM/yyyy' }}</div>
+                    <div class="detail-bookigns" *ngIf="reserve.numLista != null">Nº {{reserve.numLista}} de {{reserve.aforo_pista}}</div>
+                    <div class="detail-bookigns" *ngIf="reserve.numLista == null">{{reserve.horaInicio}} - {{reserve.horaFinalizacion}}</div>
                 </div>
 
-                <div class="bg-show-court-icon" routerLink="/details-court/">
+                <div class="bg-show-court-icon" routerLink="/details-court/{{reserve.pistas_id}}">
                     <div class="icon show-court-icon"></div>
                 </div>
+                <img class="img-court-reserved" src="{{ 'http://127.0.0.1:8000/images/court/' + reserve.rutaImagen_pista.split('/')[3] }}">
+
             </section>
         </aside>
 

@@ -21,17 +21,37 @@
     background-image: url(../../assets/icon/search.svg);
 }
 
+.edit-court-icon {
+    background-image: url(../../assets/icon/edit-2.svg);
+}
+
+.delete-court-icon {
+    background-image: url(../../assets/icon/trash.svg);
+}
+
+.plus-icon {
+    background-image: url(../../assets/icon/plus.svg);
+}
+
+.likes-info-icon {
+    background-image: url(../../assets/icon/info.svg);
+}
+
 .profile-icon {
     border-radius: 50%;
     outline: 2px solid $blue;
     outline-offset: 3px;
 }
 
+.reserve-icon {
+    background-image: url(../../assets/icon/reserve-icon.svg);  
+}
+
 .option-court-icon {
     background-image: url(../../assets/icon/settingsCourt.svg);  
 }
 
-.show-court-icon {
+.show-court-icon, .arrow-right-icon {
     background-image: url(../../assets/icon/arrow-right.svg);
 }
 

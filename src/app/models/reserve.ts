@@ -1,0 +1,15 @@
+export interface Reserve {
+    id: number,
+    created_at: string,
+    updated_at: string,
+    fechaCita: Date,
+    numLista?: number,
+    horaInicio?: string,
+    horaFinalizacion?: string,
+    users_id: number,
+    pistas_id: number,
+    nombre_pista: string,
+    pista_activa: string,
+    aforo_pista?: number,
+    rutaImagen_pista: string,
+}

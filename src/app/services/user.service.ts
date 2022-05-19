@@ -59,4 +59,53 @@ export class UserService {
     }
     return this.http.post<any>(this.url + 'logout', data);
   }
+
+  getWarnings() {
+    return this.http.get<any>(this.url + 'get-warnings');
+  }
+
+  getRole() {
+    return this.http.get<any>(this.url + 'get-role');
+  }
+
+  deleteAccount() {
+    return this.http.delete<any>(this.url + 'delete-account');
+  }
+
+  editEmail(email: string) {
+    let data = {
+      email: email
+    }
+
+    return this.http.put<any>(this.url + 'edit-email/', data);
+  }
+
+  editUsername(firstName: string, lastName: string) {
+    let data = {
+      nombre: firstName,
+      apellidos: lastName
+    }
+
+    return this.http.put<any>(this.url + 'edit-user/', data);
+  }
+
+  updateImg(foto_perfil: File) {
+
+    const formData = new FormData();
+    formData.append('foto_perfil', foto_perfil);
+
+    return this.http.post<any>(this.url + 'upload-image/', formData);
+  }
+
+  deleteImg() {
+    return this.http.delete<any>(this.url + 'delete-image/');
+  }
+
+  updateRole(id: number, rol_id: number) {
+    let data = {
+      rol_id: rol_id
+    }
+
+    return this.http.put<any>(this.url + 'update-role/' + id, data);
+  }
 }

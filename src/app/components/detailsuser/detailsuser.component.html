@@ -1,1 +1,64 @@
-<p>detailsuser works!</p>
+<span #errorMsg class="error-msg popup"></span>
+<span #successMsg class="success-msg popup"></span>
+<div #window class="confirm-window">
+    <p>¿Estás seguro de que quieres realizar esta operación?</p>
+    <div class="buttons">
+        <button (click)="delAccount()" class="btn btn-primary">Aceptar</button>
+        <button (click)="showHideWindow()" class="btn btn-error">Cancelar</button>
+    </div>
+</div>
+
+<article class="article-details-user">
+    <div routerLink="/courts" class="arrow-back">Volver</div>
+    <div class="select-role-user-container" *ngIf="user.rol_id == 1 && user.id != idUrl">
+        <div class="role" (click)="updateRole(1)">Convertir a Admin</div>
+        <div class="role" (click)="updateRole(2)">Convertir a Mod</div>
+        <div class="role" (click)="updateRole(3)">Convertir a Usuario</div>
+    </div>
+
+    <section class="sect-1 {{ user.rol_id == 1 && user.id != idUrl && 'add-margin' }}">
+        
+        <form #dataUserForm="ngForm" (ngSubmit)="onSubmit(dataUserForm.value)">
+            <div class="upload-img-container">
+                <label class="upload-img-label" for="upload-img">
+                    <img *ngIf="user.rutaImagen == null && filePath == ''" src="../../../assets/img/DefaultUserImg.svg" class="img-user">
+                    <img *ngIf="filePath != '' " [src]="filePath" class="img-user">
+                    <img *ngIf="user.rutaImagen != null && filePath == ''" [src]="'http://127.0.0.1:8000/images/user/' + this.user.rutaImagen.split('/')[3]" class="img-user">
+                    <div class="animation"></div>
+                </label>
+                <input type="file" name="foto_perfil" (change)="uploadPicture($event)" observeFiles [(ngModel)]="user.foto_perfil" #foto_perfil="ngModel" id="upload-img" accept="image/x-png,image/jpg,image/jpeg,image/svg">
+            </div>
+            <span class="link link-red" *ngIf="havePicture" (click)="removeProfilePicture()">Quitar foto</span>
+            <div class="fullname">
+                <input type="text" required maxlength="30" name="nombre" #nombre="ngModel" class="first-name simple-input" (click)="changeReadOnlyValue(false)" (blur)="changeReadOnlyValue(true)" [readonly]="isReadOnly" [(ngModel)]="user.nombre">
+                <input type="text" required maxlength="60" name="apellidos" #apellidos="ngModel" class="last-name simple-input" (click)="changeReadOnlyValue(false)" (blur)="changeReadOnlyValue(true)" [readonly]="isReadOnly" [(ngModel)]="user.apellidos">
+                <span class="error-msg span-2" [hidden]="(!apellidos.errors?.['required'] || apellidos.pristine) && (!nombre.errors?.['required'] || nombre.pristine)">Este campo es obligatorio</span>
+                <span class="error-msg" [hidden]="!apellidos.errors?.['maxlength']">El apellido no puede tener mas de 60 caractéres</span>
+                <span class="error-msg" [hidden]="!nombre.errors?.['maxlength']">El nombre no puede tener mas de 60 caractéres</span>
+            </div>
+            <div class="email-container">
+                <input type="text" required email name="email" #email="ngModel" class="email simple-input" [(ngModel)]="user.email" (click)="changeReadOnlyValue(false)" (blur)="changeReadOnlyValue(true)" [readonly]="isReadOnly">
+                <span class="error-msg" [hidden]="!email.errors?.['required'] || email.pristine">Este campo es obligatorio</span>
+                <span class="error-msg" [hidden]="!email.errors?.['email']">Debe tener formato Email</span>
+            </div>
+
+            <input class="btn btn-primary" type="submit" [disabled]="!dataUserForm.valid" value="Guardar cambios">
+        </form>
+    </section>
+
+    <section class="sect-2">
+        <p class="text-warnings">Número de advertencias: <span class="num-warnings">{{user.numAdvertencias}}</span></p>
+        <div class="warnings-container">
+            <input type="text" class="input-warning {{adv1 == null ? '' : 'input-warning-active'}}" [readonly]="true" [value]="adv1 == null ? 'Sin advertencia' : adv1">
+            <input type="text" class="input-warning {{adv2 == null ? '' : 'input-warning-active'}}" [readonly]="true" [value]="adv2 == null ? 'Sin advertencia' : adv2">
+        </div>
+    </section>
+
+    <section class="sect-3">
+        <button class="btn btn-error" (click)="logout()">Cerrar sesión</button>
+        <span class="link link-red" (click)="showHideWindow()">Borrar cuenta</span>
+    </section>
+    
+    <p class="role-text">Rol de la cuenta: <span class="role">{{role}}</span></p>
+</article>
+

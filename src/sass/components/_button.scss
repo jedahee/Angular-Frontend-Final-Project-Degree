@@ -7,14 +7,33 @@
     pointer-events: none;
 }
 
-.btn-primary {
+.btn-primary, .btn-footer {
     background-color: $blue;
+}
+
+.btn-primary:hover, .btn-footer:hover {
+    background-color: $blue-hover;
 }
 
 .btn-error {
     background-color: $error_red;
 }
 
-.btn-primary:hover {
-    background-color: $blue-hover;
+.btn-error:hover {
+    background-color: $error_red-hover;
+}
+
+
+.btn-footer {
+    border-radius: 15px 15px 0 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .icon {
+        width: 20px;
+        height: 20px;
+        margin: 0 .8rem;
+    }
 }

@@ -5,7 +5,7 @@
 }
 
 .popup {
-    position: absolute;
+    position: fixed;
     left: 50%;
     transform: translateX(-50%) scale(1.3);
     top: 20px;

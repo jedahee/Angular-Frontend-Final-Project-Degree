@@ -22,6 +22,9 @@
 @import 'sass/components/court-card';
 @import 'sass/components/circle';
 @import 'sass/components/aside';
+@import 'sass/components/confirm-window';
+@import 'sass/components/modal';
+@import 'sass/components/comments';
 
 // VIEWS
 @import 'sass/views/login';
@@ -29,6 +32,8 @@
 @import 'sass/views/forgot-password';
 @import 'sass/views/update-password';
 @import 'sass/views/court';
+@import 'sass/views/details-user';
+@import 'sass/views/details-court';
 @import 'sass/views/404-page';
 
 // LAYOUT
