@@ -1,0 +1,72 @@
+.icon {
+    width: 20px;
+    height: 20px;
+}
+
+.comment {
+    display: flex;
+    flex-direction: column;
+    margin: .5rem 0 1rem 0;
+    min-width: 100%;
+
+    .header-comment {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        width: 100%;
+
+        .delete-court-icon {
+            position: absolute;
+            top: 0px;
+            right: 20px;
+            margin-right: 20px;
+        }
+
+        & > div:nth-child(1) {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            img {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+            }
+            
+            .username {
+                margin: .5rem;
+            }
+
+            svg {
+                margin: .5rem;
+                cursor: pointer;
+            }
+        }
+
+        .icon {
+            position: relative;
+            width: 20px;
+            height: 20px;
+
+            .modal {
+                top: -50px;
+                left: -120px;
+            }
+        }
+
+        .info-icon:hover > .modal {
+            transform: translateY(10px);
+            opacity: 1;
+        }
+    }
+
+    .article-comment {
+        width: 100%;
+        .text-comment {
+            width: 100%;
+            text-align: start;
+            word-break: break-all;
+        }
+    }
+}

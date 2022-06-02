@@ -1,0 +1,29 @@
+@media only screen and (min-width: $max-width) {
+    .article-list-users  {
+        padding-top: 1.2rem;
+        border-radius: 5px;
+        -webkit-box-shadow: 0px -80px 42px 5px #5c5c5c84;
+        -moz-box-shadow: 0px -80px 42px 5px #5c5c5c84;
+        box-shadow: 0px -80px 42px 5px #5c5c5c84;
+
+        .search {
+            width: 50%;
+            margin: 1.5rem auto;
+        }
+
+        .user-container {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            column-gap: 1.3rem;
+        }
+    }
+}
+
+@media only screen and (min-width: 500px) {
+    .article-list-users  {
+
+        .user-container {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            column-gap: 1.3rem;
+        }
+    }
+}

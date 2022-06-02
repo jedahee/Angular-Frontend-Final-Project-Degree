@@ -1,0 +1,49 @@
+<div routerLink="/details-court/{{idUrl}}" class="arrow-back">Volver</div>
+
+<span #errorMsg class="error-msg popup"></span>
+<span #successMsg class="success-msg popup"></span>
+
+<article class="article-reserve">
+    <section class="credit-card">
+        <header>
+            <h1>Tarjeta de crédito</h1>
+            <img src="../../../assets/icon/detailsCreditCard.svg">
+        </header>
+        <main>
+            <input type="text" placeholder="0000" maxlength="4">
+            <input type="text" placeholder="1111" maxlength="4">
+            <input type="text" placeholder="2222" maxlength="4">
+            <input type="text" placeholder="3333" maxlength="4">
+        </main>
+        <footer>
+            <input type="text" class="simple-input" placeholder="Jesús Daza Hernández">
+            <input type="text" class="simple-input" placeholder="04/23">
+        </footer>
+    </section>
+
+    <section class="container-date">
+        <span>Seleccionar fecha: </span>
+        <input type="date" *ngIf="court.deporte_id != 5" (change)="updateHoursAvailable()" [value]="today | date:'yyyy-MM-dd'" [(ngModel)]="date_selected" [min]="today | date:'yyyy-MM-dd'" max="{{year}}-12-31">
+        <input type="date" *ngIf="court.deporte_id == 5" (change)="updateCapacityAvailable()" [value]="today | date:'yyyy-MM-dd'" [(ngModel)]="date_selected" [min]="today | date:'yyyy-MM-dd'" max="{{year}}-12-31">
+    </section>
+
+    <h1 *ngIf="!isCapacity" class="title">Horarios disponibles</h1>
+
+    <section *ngIf="!isCapacity" class="times-to-reserve">
+        <div [ngClass]="addCss(hour)" (click)="select_schedule(hour)" *ngFor="let hour of calendar_court" class="time-to-reserve">{{hour}}:00 - {{hour+1}}:00</div>
+    </section>
+
+    <section *ngIf="isCapacity" class="num-list">
+        <h1 class="small-text">Nº de participantes para esta fecha</h1>
+        <div class="inf-num-list">
+            <h1>{{numReservesWithCapacity}} <span>/ {{court.aforo}}</span></h1>
+        </div>
+        <p *ngIf="court.aforo != null && numReservesWithCapacity < court.aforo  && !haveReserve">Tu número como participante será el <span>{{numYourBooking}}</span></p>
+        <p *ngIf="haveReserve">Ya tienes una reserva para esta fecha. Tu número de participante es el <span>{{rememberBookingNumber}}</span></p>
+    </section>
+
+    <button [disabled]="schedule_selected == -1 && court.aforo == null" (click)="addReserve()" *ngIf="(court.aforo != null && numReservesWithCapacity < court.aforo && !haveReserve) || (court.aforo == null && court.horaInicio != null && court.horaFinalizacion != null)" class="btn btn-footer">
+        <span>COMPRAR</span>
+        <div class="icon shopping-icon"></div>
+    </button>
+</article>

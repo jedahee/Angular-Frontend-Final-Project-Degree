@@ -1,5 +1,6 @@
 <span #errorMsg class="error-msg popup"></span>
 <span #successMsg class="success-msg popup"></span>
+
 <div #window class="confirm-window">
     <p>¿Estás seguro de que quieres realizar esta operación?</p>
     <div class="buttons">
@@ -10,25 +11,25 @@
 
 <article class="article-details-user">
     <div routerLink="/courts" class="arrow-back">Volver</div>
-    <div class="select-role-user-container" *ngIf="user.rol_id == 1 && user.id != idUrl">
+    <div class="select-role-user-container" *ngIf="userToken.rol_id == 1 && userToken.id != idUrl">
         <div class="role" (click)="updateRole(1)">Convertir a Admin</div>
         <div class="role" (click)="updateRole(2)">Convertir a Mod</div>
         <div class="role" (click)="updateRole(3)">Convertir a Usuario</div>
     </div>
 
-    <section class="sect-1 {{ user.rol_id == 1 && user.id != idUrl && 'add-margin' }}">
+    <section class="sect-1 {{ userToken.rol_id == 1 && userToken.id != idUrl && 'add-margin' }}">
         
         <form #dataUserForm="ngForm" (ngSubmit)="onSubmit(dataUserForm.value)">
             <div class="upload-img-container">
                 <label class="upload-img-label" for="upload-img">
-                    <img *ngIf="user.rutaImagen == null && filePath == ''" src="../../../assets/img/DefaultUserImg.svg" class="img-user">
+                    <img *ngIf="!havePicture" src="../../../assets/img/DefaultUserImg.svg" class="img-user">
                     <img *ngIf="filePath != '' " [src]="filePath" class="img-user">
                     <img *ngIf="user.rutaImagen != null && filePath == ''" [src]="'http://127.0.0.1:8000/images/user/' + this.user.rutaImagen.split('/')[3]" class="img-user">
                     <div class="animation"></div>
                 </label>
                 <input type="file" name="foto_perfil" (change)="uploadPicture($event)" observeFiles [(ngModel)]="user.foto_perfil" #foto_perfil="ngModel" id="upload-img" accept="image/x-png,image/jpg,image/jpeg,image/svg">
             </div>
-            <span class="link link-red" *ngIf="havePicture" (click)="removeProfilePicture()">Quitar foto</span>
+            <span class="link link-red" *ngIf="havePicture && user.rutaImagen != null" (click)="removeProfilePicture()">Quitar foto</span>
             <div class="fullname">
                 <input type="text" required maxlength="30" name="nombre" #nombre="ngModel" class="first-name simple-input" (click)="changeReadOnlyValue(false)" (blur)="changeReadOnlyValue(true)" [readonly]="isReadOnly" [(ngModel)]="user.nombre">
                 <input type="text" required maxlength="60" name="apellidos" #apellidos="ngModel" class="last-name simple-input" (click)="changeReadOnlyValue(false)" (blur)="changeReadOnlyValue(true)" [readonly]="isReadOnly" [(ngModel)]="user.apellidos">
@@ -55,7 +56,9 @@
     </section>
 
     <section class="sect-3">
-        <button class="btn btn-error" (click)="logout()">Cerrar sesión</button>
+        <button class="btn btn-error" (click)="logout()" *ngIf="userToken.id == user.id">Cerrar sesión</button>
+        <button class="btn btn-error" (click)="activateOrDisableAccount(this.idUrl, 0)" *ngIf="userToken.id != user.id && userToken.rol_id == 1 && user.activo">Desactivar cuenta</button>
+        <button class="btn btn-error" (click)="activateOrDisableAccount(this.idUrl, 1)" *ngIf="userToken.id != user.id && userToken.rol_id == 1 && !user.activo">Activar cuenta</button>
         <span class="link link-red" (click)="showHideWindow()">Borrar cuenta</span>
     </section>
     

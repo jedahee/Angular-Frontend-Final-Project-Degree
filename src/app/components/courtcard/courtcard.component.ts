@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, AfterViewChecked, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, AfterViewChecked, ViewChild, Input } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { Court } from 'src/app/models/court';
 import { UserService } from 'src/app/services/user.service';
@@ -13,8 +13,13 @@ export class CourtcardComponent implements OnInit, AfterViewChecked {
 
   @Input() court: Court = <Court>{}; 
   @Input() rol_id: number = -1;
+  @Output() onWindow = new EventEmitter<number>();
 
   constructor(private rute: Router, private userserv: UserService) {
+  }
+
+  openConfirmWindow() {
+    this.onWindow.emit(this.court.id);
   }
 
   ngOnInit(): void {   

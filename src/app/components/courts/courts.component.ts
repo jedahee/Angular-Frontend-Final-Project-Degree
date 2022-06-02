@@ -25,7 +25,8 @@ export class CourtsComponent implements AfterViewChecked  {
   @ViewChild('horaFin') horaFin: ElementRef = <ElementRef>{};
   @ViewChild('aforo') aforo: ElementRef = <ElementRef>{};
   @ViewChild('aside') aside: ElementRef = <ElementRef>{};
-  
+  @ViewChild('window') window: ElementRef = <ElementRef>{};
+
   public courts: any[] = [];
   public courtsFiltered: any[] = [];
   public courtsFilteredByName: any[] = [];
@@ -39,6 +40,7 @@ export class CourtsComponent implements AfterViewChecked  {
   public token_user: string|null = "";
   public isLogged: boolean = false;
   public error: any;
+  public idCourtDelete: number = -1;
   
 
   constructor(private actRoute: ActivatedRoute, private rute: Router, private userserv: UserService, private courtserv: CourtService, private floorserv: FloorService, private sportserv: SportService, private reserveserv: ReserveService) {
@@ -114,6 +116,33 @@ export class CourtsComponent implements AfterViewChecked  {
     this.aforo.nativeElement.disabled = this.horaInicio.nativeElement.value != "" || this.horaFin.nativeElement.value != "";
   }
 
+  showHideWindow(e: number) {
+    if (e == -1)
+      this.window.nativeElement.classList.remove("confirm-window-active");
+    else
+      this.window.nativeElement.classList.add("confirm-window-active");
+    
+    this.idCourtDelete = e;
+  }
+
+  delCourt() {
+    this.courtserv.delCourt(this.idCourtDelete).subscribe(datos => {
+      this.window.nativeElement.classList.remove("confirm-window-active");
+      this.courtsFiltered = this.courtsFiltered.filter(c => c.id != this.idCourtDelete);
+    }, error => {
+      this.window.nativeElement.classList.remove("confirm-window-active");
+      if (error.error.msg != undefined)
+        this.errorMsgRef.nativeElement.innerHTML = error.error.msg;
+      else
+        this.errorMsgRef.nativeElement.innerHTML = "No se puede borrar la pista con comentarios asociados";
+      
+      this.errorMsgRef.nativeElement.classList.add('popup-transition');
+      setTimeout(() => {
+        this.errorMsgRef.nativeElement.classList.remove('popup-transition');
+      }, 2500);
+    });
+  }
+
   logout() {
     if (this.token_user != null) {
       this.userserv.logout(this.token_user).subscribe(datos => {
@@ -172,12 +201,11 @@ export class CourtsComponent implements AfterViewChecked  {
             if (this.court.campoAbierto == undefined || (court.campoAbierto == this.court.campoAbierto))
               if (this.court.iluminacion == undefined || (court.iluminacion == this.court.iluminacion))
                 if ((court.aforo != null && this.court.aforo != undefined && this.court.aforo < court.aforo) || (this.court.aforo == undefined))
-                  if (this.court.precioPorHora <= court.precioPorHora || this.court.precioPorHora == undefined)
+                  if (this.court.precioPorHora >= court.precioPorHora || this.court.precioPorHora == undefined)
                     if ((court.horaInicio != null && this.court.horaInicio != undefined && new Date('1/1/1990 ' + this.court.horaInicio) <= new Date('1/1/1990 ' + court.horaInicio)) || (this.court.horaInicio == undefined))
                       if ((court.horaFinalizacion != null && this.court.horaFinalizacion != undefined && new Date('1/1/1990 ' + this.court.horaFinalizacion) >= new Date('1/1/1990 ' + court.horaFinalizacion)) || (this.court.horaFinalizacion == undefined)) {
                         this.courtsFiltered.push(court);
                       }
-        console.log(this.court);
     });
 
     this.disableInputs();
@@ -185,7 +213,7 @@ export class CourtsComponent implements AfterViewChecked  {
 
   calculateMaxPrice() {
     this.courts.forEach(court => {
-      if (court.precioPorHora > this.maxPrice)
+      if (court.precioPorHora > Number(this.maxPrice))
         this.maxPrice = court.precioPorHora;
     });
 

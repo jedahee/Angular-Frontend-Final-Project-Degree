@@ -1,0 +1,25 @@
+@media only screen and (min-width: $max-width) {
+    .article-register  {
+        padding: 2rem;
+        border-radius: 5px;
+        -webkit-box-shadow: 0px -80px 42px 5px #5c5c5c84;
+        -moz-box-shadow: 0px -80px 42px 5px #5c5c5c84;
+        box-shadow: 0px -80px 42px 5px #5c5c5c84;
+
+    }
+
+    .credit-card {
+        height: 185px;
+        footer {
+            margin-top: 2.5rem;
+        }
+    }
+}
+
+@media only screen and (max-width: $max-width) {
+    .article-register  {
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+}

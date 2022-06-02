@@ -17,6 +17,10 @@ import { DetailsuserComponent } from './components/detailsuser/detailsuser.compo
 import { DetailscourtComponent } from './components/detailscourt/detailscourt.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { CommentsComponent } from './components/comments/comments.component';
+import { ReservesComponent } from './components/reserves/reserves.component';
+import { FormcourtComponent } from './components/formcourt/formcourt.component';
+import { ListusersComponent } from './components/listusers/listusers.component';
+import { ListreservesComponent } from './components/listreserves/listreserves.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,10 @@ import { CommentsComponent } from './components/comments/comments.component';
     DetailsuserComponent,
     DetailscourtComponent,
     CommentsComponent,
+    ReservesComponent,
+    FormcourtComponent,
+    ListusersComponent,
+    ListreservesComponent,
   ],
   imports: [
     BrowserModule,

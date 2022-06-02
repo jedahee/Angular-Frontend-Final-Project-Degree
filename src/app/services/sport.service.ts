@@ -13,4 +13,8 @@ export class SportService {
   getSports() {
     return this.http.get<any>(this.url + 'get-sports');
   }
+
+  getSport(id: number) {
+    return this.http.get<any>(this.url + 'get-sport/' + id);
+  }
 }

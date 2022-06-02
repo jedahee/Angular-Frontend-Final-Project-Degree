@@ -25,6 +25,8 @@
 @import 'sass/components/confirm-window';
 @import 'sass/components/modal';
 @import 'sass/components/comments';
+@import 'sass/components/window-add-warning';
+@import 'sass/components/credit_card';
 
 // VIEWS
 @import 'sass/views/login';
@@ -34,6 +36,17 @@
 @import 'sass/views/court';
 @import 'sass/views/details-user';
 @import 'sass/views/details-court';
+@import 'sass/views/reserves';
+@import 'sass/views/form-court';
+@import 'sass/views/list-users';
+@import 'sass/views/list-reserves';
 @import 'sass/views/404-page';
 
 // LAYOUT
+
+@import 'sass/layout/court';
+@import 'sass/layout/details-user';
+@import 'sass/layout/reserves';
+@import 'sass/layout/form-court';
+@import 'sass/layout/list-users';
+@import 'sass/layout/list-reserves';

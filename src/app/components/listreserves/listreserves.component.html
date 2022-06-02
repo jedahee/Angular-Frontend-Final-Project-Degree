@@ -1,0 +1,24 @@
+<span #errorMsg class="error-msg popup"></span>
+<div routerLink="/courts" class="arrow-back">Volver</div>
+
+<article class="article-list-reserves">
+    <section class="filter">
+        <h1 class="title">LISTA DE RESERVAS</h1>
+
+        <div class="input-date-container">
+            <label for="date_filter">Selecciona una fecha: </label>
+            <input type="date" [(ngModel)]="date_selected" (change)="filterByDate()" name="date_filter" min="2022-01-01" max="2022-12-31">
+        </div>
+    </section>
+    <section class="reserves-container">
+        <section class="reserve" *ngFor="let booking of reservesFiltered">
+            <p>
+                <span class="bold">{{booking.nombre_usuario}}</span> ha alquilado <span class="bold">{{booking.nombre_pista}}</span> 
+                el día <span class="bold">{{booking.created_at | date:'dd-MM-yyyy'}}</span> para el día <span class="bold">{{booking.fechaCita | date:'dd-MM-yyyy'}}</span> 
+            </p>
+            <div class="container-icon-delete" (click)="delReserve(booking.id)">
+                <div class="icon delete-reserve-icon"></div>
+            </div>
+        </section>
+    </section>
+</article>

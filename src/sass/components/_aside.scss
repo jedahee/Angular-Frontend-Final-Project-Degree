@@ -12,6 +12,7 @@
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
+    overflow-y: auto;
 
     & > .empty_reserve {
         opacity: .7;
@@ -41,6 +42,7 @@
         padding: .5rem 0;
         position: relative;
         overflow: hidden;
+        min-height: 83px;
 
         & > .img-court-reserved {
             position: absolute;

@@ -1,0 +1,30 @@
+<span #errorMsg class="error-msg popup"></span>
+<div routerLink="/courts" class="arrow-back">Volver</div>
+
+<article class="article-list-users">
+    <section class="filter">
+        <h1 class="title">LISTA DE USUARIOS</h1>
+        <nav class="search">
+            <input [(ngModel)]="username_filter" type="text" class="input-search" (keyup)="returnUserFilteredByName()">
+            <div class="icon search-icon"></div>
+        </nav>
+    </section>
+    <section class="user-container">
+        <section class="user" *ngFor="let u of usersFiltered">
+            <div class="info-user">
+                <div class="img-and-name">
+                    <img *ngIf="u.rutaImagen != null" src="{{ 'http://127.0.0.1:8000/images/user/' + u.rutaImagen.split('/')[3] }}">
+                    <img *ngIf="u.rutaImagen == null" src="../../../assets/img/DefaultUserImg.svg">
+                    <span>{{u.email}}</span>
+                    <div class="circle {{u.activo ? 'circle-active' : 'circle-disabled' }}"></div>
+                </div>
+                <div class="num-warnings-container">
+                    <span class="num-warnings">Número de advertencias: <span>{{u.numAdvertencias}}</span></span>
+                </div>
+            </div>
+            <div class="square-link" routerLink="/details-user/{{u.id}}">
+                <div class="icon arrow-right-icon"></div>
+            </div>
+        </section>
+    </section>
+</article>

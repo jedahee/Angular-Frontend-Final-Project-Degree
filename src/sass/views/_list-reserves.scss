@@ -1,0 +1,76 @@
+.article-list-reserves {
+    margin-top: 3rem;
+
+    .bold {
+        font-weight: 500;
+    }
+
+    .title {
+        margin: 1.5rem;
+    }
+
+    .input-date-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        input {
+            accent-color: $blue;
+            border-top-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            border: 2px solid $blue;
+            padding: .3rem .4rem;
+            color: $white;
+            background-color: transparent;      
+        }
+
+        label {
+            margin-right: 1rem;
+        }
+    }
+
+    .reserves-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+        row-gap: 1.2rem;
+
+        .reserve {
+            background-color: $gray;
+            display: grid;
+            grid-template-columns: 78%;
+            transition: grid-template-columns .2s ease;
+            height: max-content;
+            min-height: 100px;
+            position: relative;
+    
+            p {
+                margin: .5rem 1rem;
+            }
+
+            .container-icon-delete {
+                background-color: $error_red;
+                position: absolute;
+                cursor: pointer;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                width: 20%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: background-color .2s ease, width .2s ease;
+            }
+
+            .icon {
+                position:static;
+            }
+        }
+
+        .reserve:hover .container-icon-delete {
+            background-color: $error_red_hover;
+            width: 24%;   
+        }
+    }
+}

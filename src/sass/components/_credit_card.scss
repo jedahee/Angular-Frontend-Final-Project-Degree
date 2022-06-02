@@ -1,0 +1,46 @@
+.credit-card {
+    background-color: $gray;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 1rem 2rem;
+    width: 90%;
+    margin: 1.5rem auto;
+    min-height: 150px;
+
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+
+    main {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        column-gap: 10px;
+
+        input {
+            width: 100%;
+            background-color: transparent;
+            border: 2px solid $blue;
+            border-top-left-radius: 10px;     
+            border-bottom-right-radius: 10px;
+            padding: 0 .5rem;
+            color: $white;
+            text-align: center;
+        }
+    }
+
+    footer {
+        margin-top: .6rem;
+        font-size: .7em;
+        display: grid;
+        grid-template-columns: 70% 30%;
+        column-gap: 10px;
+    }
+
+    input::placeholder {
+        color: $black;
+    }
+}

@@ -1,0 +1,18 @@
+@media only screen and (min-width: $max-width) {
+    .main-courts {
+        .article-courts {
+            header {
+                & > section:nth-child(2) {
+                    left: 50%;
+                    transition: transform .5s ease, opacity .2s ease, border-radius .5s ease;
+                    transform: translateX(-50%) scale(1);
+                }
+            }
+        }
+    }
+
+    .container-bookings {
+        width: 40%;
+        max-width: 400px;
+    }
+}

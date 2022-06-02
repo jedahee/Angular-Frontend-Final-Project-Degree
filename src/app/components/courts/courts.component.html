@@ -1,9 +1,20 @@
+<div #window class="confirm-window">
+    <p>¿Estás seguro de que quieres realizar esta operación?</p>
+    <div class="buttons">
+        <button (click)="delCourt()" class="btn btn-primary">Aceptar</button>
+        <button (click)="showHideWindow(-1)" class="btn btn-error">Cancelar</button>
+    </div>
+</div>
+
 <main class="main-courts">
     <span #errorMsg class="error-msg popup"></span>
     <header class="header header-courts">
         <section>
             <div (click)="logout()" class="icon logout-icon"></div>
             <div *ngIf="isLogged" (click)="showHideAside()" class="icon bookings-icon"></div>
+            <div *ngIf="isLogged && user.rol_id == 1" routerLink="/list-users" class="icon group-users-icon"></div>
+            <div *ngIf="isLogged && user.rol_id == 1" routerLink="/list-reserves" class="icon list-icon"></div>
+            <div *ngIf="isLogged && user.rol_id == 1" routerLink="/form-court/-1" class="icon plus-icon"></div>
         </section>
 
         <div #profileImg routerLink="/details-user/{{user.id}}" *ngIf="isLogged" class="icon profile-icon"></div>
@@ -65,7 +76,7 @@
                 <div class="range">
                     <label class="label-range" for="">Precio por hora</label>
                     <div>
-                        <input [(ngModel)]="court.precioPorHora" (change)="returnCourtsFiltered()" (input)="refreshPrice()" class="input-range" [min]="0" [max]="calculateMaxPrice()" [value]="0" type="range">
+                        <input step="0.1" [(ngModel)]="court.precioPorHora" (change)="returnCourtsFiltered()" (input)="refreshPrice()" class="input-range" [min]="0" [max]="calculateMaxPrice()" type="range">
                         <span #price ngDefaultControl class="price">0 <span>€</span></span>
                     </div>
                 </div>
@@ -99,7 +110,7 @@
         <section class="container-courts">
             <div class="court-card" *ngFor="let court of courtsFiltered">
                 <img src="{{ 'http://127.0.0.1:8000/images/court/' + court.rutaImagen.split('/')[3] }}">
-                <app-courtcard [court]="court" [rol_id]="user.rol_id"></app-courtcard>
+                <app-courtcard (onWindow)="showHideWindow($event)" [court]="court" [rol_id]="user.rol_id"></app-courtcard>
             </div>
         </section>
     </article>

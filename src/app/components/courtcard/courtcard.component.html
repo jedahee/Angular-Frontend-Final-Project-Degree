@@ -1,5 +1,5 @@
-<div class="icon edit-court-icon" *ngIf="rol_id == 1"></div>
-<div class="icon delete-court-icon" *ngIf="rol_id == 1"></div>
+<div class="icon edit-court-icon" routerLink="/form-court/{{court.id}}" *ngIf="rol_id == 1"></div>
+<div class="icon delete-court-icon" (click)="openConfirmWindow()" *ngIf="rol_id == 1"></div>
 
 <section class="content-court-card">
     <h1 class="title-court">{{court.nombre}}</h1>

@@ -29,12 +29,28 @@
     background-image: url(../../assets/icon/trash.svg);
 }
 
+.delete-reserve-icon {
+    background-image: url(../../assets/icon/white-trash.svg);
+}
+
 .plus-icon {
     background-image: url(../../assets/icon/plus.svg);
 }
 
-.likes-info-icon {
+.likes-info-icon, .info-icon {
     background-image: url(../../assets/icon/info.svg);
+}
+
+.shopping-icon {
+    background-image: url(../../assets/icon/shopping-cart.svg);
+}
+
+.group-users-icon {
+    background-image: url(../../assets/icon/group-users.svg);
+}
+
+.list-icon {
+    background-image: url(../../assets/icon/list.svg);
 }
 
 .profile-icon {

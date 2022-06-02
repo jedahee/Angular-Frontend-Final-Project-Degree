@@ -1,87 +1,105 @@
 <span #errorMsg class="error-msg popup"></span>
 <span #successMsg class="success-msg popup"></span>
 
-<header class="header header-details-courts">
+<section #windowAddWarning class="window-add-warning">
+    <div class="input-container">
+        <input class="input" #input (blur)="activeAnimationInput()" [(ngModel)]="warning_text" type="text" id="text-msg">
+        <label class="label-input" for="text-msg">¿Por qué motivo quieres borrar este mensaje?</label>
+    </div>
+    <div class="buttons">
+        <button (click)="addWarning()" class="btn btn-primary">Enviar</button>
+        <button (click)="exitWindowAddWarning()" class="btn btn-error">Cancelar</button>
+    </div>
+</section>
+
+<header  class="header header-details-courts">
     <section>
-        <div routerLink="/courts" class="icon logout-icon"></div>
-        <div *ngIf="isLogged" (click)="showHideAside()" class="icon bookings-icon"></div>
+        <div routerLink="/courts" class="icon arrow-right-icon"></div>
+        <div *ngIf="isLogged && user.rol_id == 1" routerLink="/list-users" class="icon group-users-icon"></div>
+        <div *ngIf="isLogged && user.rol_id == 1" routerLink="/list-reserves" class="icon list-icon"></div>
+        <div *ngIf="isLogged && user.rol_id == 1" routerLink="/form-court/-1" class="icon plus-icon"></div>
     </section>
 
     <div #profileImg routerLink="/details-user/{{user.id}}" *ngIf="isLogged" class="icon profile-icon"></div>
 </header>
 <article class="article-details-court">
     <header class="article-header">
+        <img *ngIf="court.rutaImagen != null && court.rutaImagen != undefined" src="{{ 'http://127.0.0.1:8000/images/court/' + court.rutaImagen.split('/')[3] }}">
+        <img *ngIf="court.rutaImagen == null || court.rutaImagen == undefined" src="{{ 'http://127.0.0.1:8000/images/court/default.svg'}}">
         <div class="basic-info">
-            <h1 class="title">PISTA PADEL TU VIEJA</h1>
-            <span class="address">C. el Juncal, nº7 41310, Brenes, Sevilla</span>
+            <h1 class="title">{{court.nombre}}</h1>
+            <span class="address">{{court.direccion}}</span>
         </div>
         <span class="price">
-            2,50€ / h
+            {{court.precioPorHora}}€ / h
         </span>
     </header>
     <main class="article-main">
         <section class="extra-info">
             <div class="info-1">
                 <div class="available">
-                    <div class="circle circle-active"></div>
+                    <div class="circle {{court.disponible ? 'circle-active' : 'circle-disabled'}}"></div>
                     <span>Disponible</span>
                 </div>
 
                 <div class="open-air">
-                    <div class="circle circle-disabled"></div>
+                    <div class="circle {{court.campoAbierto ? 'circle-active' : 'circle-disabled'}}"></div>
                     <span>Campo abierto</span>
                 </div>
 
                 <div class="lighting">
-                    <div class="circle circle-active"></div>
+                    <div class="circle {{court.iluminacion ? 'circle-active' : 'circle-disabled'}}"></div>
+
                     <span>Iluminación</span>
                 </div>
             </div>
             <div class="info-2">
-                <span>Hora inicio: 16:00</span>
-                <span>Hora finalización: 20:00</span>
-                <span>Aforo: 30</span>
-                <span>Deporte: Padel</span>
-                <span>Suelo: Madera</span>
+                <span *ngIf="court.aforo == null">Hora inicio: {{court.horaInicio}}</span>
+                <span *ngIf="court.aforo == null">Hora finalización: {{court.horaFinalizacion}}</span>
+                <span *ngIf="court.horaInicio == null && court.horaFinalizacion == null">Aforo: {{court.aforo}}</span>
+                <span>Deporte: {{sport_name.charAt(0).toUpperCase() + sport_name.slice(1)}}</span>
+                <span>Suelo: {{floor_name.charAt(0).toUpperCase() + floor_name.slice(1)}}</span>
             </div>
         </section>
-        <div class="reserve-info">
-            <span>Tienes una reserva para la fecha: <span class="date-reserve">24-05-22</span></span>
-            <div class="icon delete-court-icon"></div>
+        <div class="reserve-info" *ngFor="let booking of existsBookings">
+            <span>Tienes una reserva para la fecha: <span class="date-reserve">{{booking.fechaCita | date:'dd-MM-yyyy'}}</span></span>
+            <div (click)="delReserve(booking.id)" class="icon delete-court-icon"></div>
         </div>
 
         <section class="container-comments">
             <div class="info-comments">
-                <h1 class="title">26 Comentarios</h1>
+                <h1 class="title">{{comments.length}} comentarios</h1>
                 <div class="icon likes-info-icon">
                     <div class="modal">
-                        <span class="like-op">18 Me gusta</span>
-                        <span class="dislike-op">20 No me gusta</span>
+                        <span class="like-op">{{total_likes}} Me gusta</span>
+                        <span class="dislike-op">{{total_dislikes}} No me gusta</span>
                     </div>
                 </div>
             </div>
 
-            <app-comments></app-comments>
+            <div class="parent-comment" *ngFor="let comment of comments">
+                <app-comments (openWindow)="openWindowAddWarning($event)" (onDelete)="delCommentFromArray($event)" [user]="user" [comment]="comment"></app-comments>
+            </div>
 
-            <div class="link">Leer más</div>
+            <span *ngIf="emptyComments != '' " class="text-empty-comments">{{emptyComments}}</span>
         </section>
     </main>
-    <footer class="article-footer">
-        <form class="complete-input">
+    <footer *ngIf="token_user != null" class="article-footer">
+        <div class="complete-input">
             <div class="input-container">
-                <input class="input" type="text" id="text-msg">
+                <input [(ngModel)]="commentToAdd.text" #input (blur)="activeAnimationInput()" class="input" type="text" id="text-msg">
                 <label class="label-input" for="text-msg">¡Comparte tu opinión!</label>
             </div>
             
             <!-- ICONO MANO ARRIBA -->
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7 22H4C3.46957 22 2.96086 21.7893 2.58579 21.4142C2.21071 21.0391 2 20.5304 2 20V13C2 12.4696 2.21071 11.9609 2.58579 11.5858C2.96086 11.2107 3.46957 11 4 11H7M14 9V5C14 4.20435 13.6839 3.44129 13.1213 2.87868C12.5587 2.31607 11.7956 2 11 2L7 11V22H18.28C18.7623 22.0055 19.2304 21.8364 19.5979 21.524C19.9654 21.2116 20.2077 20.7769 20.28 20.3L21.66 11.3C21.7035 11.0134 21.6842 10.7207 21.6033 10.4423C21.5225 10.1638 21.3821 9.90629 21.1919 9.68751C21.0016 9.46873 20.7661 9.29393 20.5016 9.17522C20.2371 9.0565 19.9499 8.99672 19.66 9H14Z" stroke="#FEFEFE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg class="hand-up-icon" (click)="likeOrDislike()" #svgLike width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 22H4C3.46957 22 2.96086 21.7893 2.58579 21.4142C2.21071 21.0391 2 20.5304 2 20V13C2 12.4696 2.21071 11.9609 2.58579 11.5858C2.96086 11.2107 3.46957 11 4 11H7M14 9V5C14 4.20435 13.6839 3.44129 13.1213 2.87868C12.5587 2.31607 11.7956 2 11 2L7 11V22H18.28C18.7623 22.0055 19.2304 21.8364 19.5979 21.524C19.9654 21.2116 20.2077 20.7769 20.28 20.3L21.66 11.3C21.7035 11.0134 21.6842 10.7207 21.6033 10.4423C21.5225 10.1638 21.3821 9.90629 21.1919 9.68751C21.0016 9.46873 20.7661 9.29393 20.5016 9.17522C20.2371 9.0565 19.9499 8.99672 19.66 9H14Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
 
-            <div class="icon arrow-right-icon"></div>
-        </form>
+            <div class="icon arrow-right-icon" (click)="addComment()"></div>
+        </div>
     </footer>
-    <button class="btn btn-footer">
+    <button routerLink="/reserve/{{idUrl}}" *ngIf="token_user != null && court.disponible" class="btn btn-footer">
         <span>RESERVAR</span>
         <div class="icon reserve-icon"></div>
     </button>

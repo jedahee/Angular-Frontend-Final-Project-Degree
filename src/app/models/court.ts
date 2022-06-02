@@ -1,9 +1,9 @@
 export interface Court {
     id: 1,
     nombre: string,
-    horaFinalizacion?: string,
-    horaInicio?: string,
-    aforo?: number,
+    horaFinalizacion?: string|null,
+    horaInicio?: string|null,
+    aforo?: number|null,
     direccion: string,
     rutaImagen?: string,
     precioPorHora: number,

@@ -53,6 +53,10 @@ export class UserService {
     return this.http.post<any>(this.url + 'get-user', data);
   }
 
+  getUserById(id: number) {
+    return this.http.get<any>(this.url + 'get-user/' + id);
+  }
+
   logout(token: string) {
     let data = {
       token: token
@@ -64,8 +68,24 @@ export class UserService {
     return this.http.get<any>(this.url + 'get-warnings');
   }
 
+  getWarningsById(id: number) {
+    return this.http.get<any>(this.url + 'get-warnings/' + id);
+  }
+
+  addWarning(text:string, id:number) {
+    let data = {
+      adv: text
+    }
+
+    return this.http.post<any>(this.url + 'add-warning/' + id, data);
+  }
+
   getRole() {
     return this.http.get<any>(this.url + 'get-role');
+  }
+
+  getRoleById(id: number) {
+    return this.http.get<any>(this.url + 'get-role/' + id);
   }
 
   deleteAccount() {
@@ -89,16 +109,37 @@ export class UserService {
     return this.http.put<any>(this.url + 'edit-user/', data);
   }
 
-  updateImg(foto_perfil: File) {
+  editEmailById(email: string, id:number) {
+    let data = {
+      email: email
+    }
+
+    return this.http.put<any>(this.url + 'edit-email/' + id, data);
+  }
+
+  editUsernameById(firstName: string, lastName: string, id:number) {
+    let data = {
+      nombre: firstName,
+      apellidos: lastName
+    }
+
+    return this.http.put<any>(this.url + 'edit-user/' + id, data);
+  }
+
+  updateImgById(foto_perfil: File, id: number) {
 
     const formData = new FormData();
     formData.append('foto_perfil', foto_perfil);
 
-    return this.http.post<any>(this.url + 'upload-image/', formData);
+    return this.http.post<any>(this.url + 'upload-image/' + id, formData);
   }
 
-  deleteImg() {
-    return this.http.delete<any>(this.url + 'delete-image/');
+  deleteImgById(id: number) {
+    return this.http.delete<any>(this.url + 'delete-image/' + id);
+  }
+
+  getUsers() {
+    return this.http.get<any>(this.url + 'get-users');
   }
 
   updateRole(id: number, rol_id: number) {
@@ -107,5 +148,13 @@ export class UserService {
     }
 
     return this.http.put<any>(this.url + 'update-role/' + id, data);
+  }
+
+  activateOrDisableAccount(id: number, activo: number) {
+    let data = {
+      activo: activo
+    }
+
+    return this.http.put<any>(this.url + 'active-desactive-account/' + id, data);
   }
 }

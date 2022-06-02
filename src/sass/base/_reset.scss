@@ -12,6 +12,17 @@
     scroll-behavior: smooth;
 }
 
+*::-webkit-scrollbar {
+    width: 5px;
+    background-color: $white;
+    border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: $gray;
+    border-radius: 5px;
+}
+
 table {
     border-collapse: collapse;
 }
@@ -19,4 +30,17 @@ table {
 html, body {
     background-color: $black;
     color: $white;
+    overflow-x: hidden;
+}
+
+article, header, .article-form {
+    max-width: $max-width;
+    margin: auto;
+}
+
+article:not(.article-comment), .article-form {
+    position: relative;
+    -webkit-box-shadow: 0px 0px 42px 5px #5c5c5c84;
+    -moz-box-shadow: 0px 0px 42px 5px #5c5c5c84;
+    box-shadow: 0px 0px 42px 5px #5c5c5c84;
 }

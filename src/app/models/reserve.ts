@@ -9,6 +9,7 @@ export interface Reserve {
     users_id: number,
     pistas_id: number,
     nombre_pista: string,
+    nombre_usuario?: string,
     pista_activa: string,
     aforo_pista?: number,
     rutaImagen_pista: string,

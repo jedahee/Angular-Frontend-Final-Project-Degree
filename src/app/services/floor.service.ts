@@ -14,4 +14,8 @@ export class FloorService {
   getFloors() {
     return this.http.get<any>(this.url + 'get-floors');
   }
+
+  getFloor(id: number) {
+    return this.http.get<any>(this.url + 'get-floor/' + id);
+  }
 }

@@ -1,6 +1,6 @@
 import { Component, ViewChildren, AfterViewInit, QueryList } from '@angular/core';
 import { User } from 'src/app/models/user';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({

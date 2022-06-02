@@ -1,0 +1,91 @@
+<span #errorMsg class="error-msg popup"></span>
+<div routerLink="/courts" class="arrow-back">Volver</div>
+
+<form class="article-form" #courtForm="ngForm" (ngSubmit)="onSubmit(courtForm.value)" >
+    <h1 class="title">{{text}} Pista</h1>
+    
+    <div class="upload-img-container" *ngIf="idUrl != -1">
+        <label class="upload-img-label" for="upload-img">
+            <img *ngIf="!havePicture" src="http://127.0.0.1:8000/images/court/default.svg" class="img-user">
+            <img *ngIf="filePath != '' " [src]="filePath" class="img-user">
+            <img #img *ngIf="court.rutaImagen != 'public/images/court/default.svg' && filePath == '' && court.rutaImagen != null" [src]="'http://127.0.0.1:8000/images/court/' + this.court.rutaImagen.split('/')[3]" class="img-user">
+            <div class="animation"></div>
+        </label>
+        <input type="file" name="foto_perfil" (change)="uploadPicture($event)" observeFiles [(ngModel)]="user.foto_perfil" #foto_perfil="ngModel" id="upload-img" accept="image/x-png,image/jpg,image/jpeg,image/svg">
+    </div>
+    <span class="link link-red" *ngIf="havePicture && court.rutaImagen != 'public/images/court/default.svg' && court.rutaImagen != null && idUrl != -1" (click)="removeProfilePicture()">Quitar foto</span>
+    
+    <div class="input-container">
+        <input #input required [(ngModel)]="court.nombre" name="nombre" #nombre="ngModel" (blur)="activeAnimationInput()" id="" class="input" type="text">
+        <label class="label-input" for="nombre">Nombre</label>
+    </div>
+    <span class="error-msg" [hidden]="!nombre.errors?.['required'] || nombre.pristine">Este campo es obligatorio</span>
+
+    <section class="schedule" *ngIf="court.deporte_id != 5">
+        <div class="select">
+            <select [(ngModel)]="court.horaInicio" #horaInicio="ngModel" (change)="maxValueSelect()" name="horaInicio" id="horaInicio">
+                <option *ngFor="let n of available_schedule_min" ngDefaultControl [value]="n">{{n}}</option>
+            </select>
+        </div>
+        <div class="select">
+            <select [(ngModel)]="court.horaFinalizacion" #horaFinalizacion="ngModel" (change)="minValueSelect()" name="horaFinalizacion" id="horaFinalizacion">
+                <option *ngFor="let n of available_schedule_max" ngDefaultControl [value]="n">{{n}}</option>
+            </select>
+        </div>
+        
+    </section>
+
+    <div class="input-container">
+        <input #input class="input" (blur)="activeAnimationInput()" required [(ngModel)]="court.direccion" name="direccion" #direccion="ngModel" id="direccion" class="input" type="text">
+        <label class="label-input" for="direccion">Dirección</label>
+    </div>
+    <span class="error-msg" [hidden]="!direccion.errors?.['required'] || direccion.pristine">Este campo es obligatorio</span>
+
+    <div class="input-container" *ngIf="court.deporte_id == 5">
+        <input #input class="input" required (blur)="activeAnimationInput()" #aforoRef #aforo="ngModel" name="aforo" [(ngModel)]="court.aforo" type="text">
+        <label class="label-input">Aforo</label>
+        <span class="error-msg" [hidden]="!aforo.errors?.['required'] || aforo.pristine">Este campo es obligatorio</span>
+    </div>
+
+    <div class="input-container pricePerHour">
+        <input #input class="input" required placeholder="2.50" (blur)="activeAnimationInput()" #precioPorHora="ngModel" name="precioPorHora" [(ngModel)]="court.precioPorHora" type="text">
+        <label class="label-input">Precio / hora</label>
+    </div>
+    <span class="error-msg" [hidden]="!precioPorHora.errors?.['required'] || precioPorHora.pristine">Este campo es obligatorio</span>
+
+    <section class="select-container">
+        <div class="select">
+            <label for="floor_select">Suelo</label>
+            <select [(ngModel)]="court.suelo_id" #suelo_id="ngModel" name="suelo_id" id="floor_select">
+                <option *ngFor="let floor of floors" ngDefaultControl [value]="floor.id">{{floor.nombre.charAt(0).toUpperCase() + floor.nombre.slice(1)}}</option>
+            </select>
+        </div>
+        <div class="select">
+            <label for="sport_select">Deporte</label>
+            <select [(ngModel)]="court.deporte_id" #deporte_id="ngModel" name="deporte_id" id="sport_select">
+                <option *ngFor="let sport of sports" ngDefaultControl [value]="sport.id">{{sport.nombre.charAt(0).toUpperCase() + sport.nombre.slice(1)}}</option>
+            </select>
+        </div>
+    </section>
+
+    <section class="ch-container">
+        <div class="checkbox">
+            <label for="available">Disponible</label>
+            <input [(ngModel)]="court.disponible" #disponible="ngModel" name="disponible" type="checkbox" id="available">
+            <label class="real-checkbox" for="available"></label>
+        </div>
+        <div class="checkbox">
+            <label for="outdoor">Campo abierto</label>
+            <input [(ngModel)]="court.campoAbierto" type="checkbox" #campoAbierto="ngModel" name="campoAbierto" id="outdoor">
+            <label class="real-checkbox" for="outdoor"></label>
+        </div>
+        <div class="checkbox">
+            <label for="light">Iluminación</label>
+            <input [(ngModel)]="court.iluminacion" #iluminacion="ngModel" type="checkbox" name="iluminacion" id="light">
+            <label class="real-checkbox" for="light"></label>
+        </div>
+    </section>
+
+    <input class="btn btn-primary" type="submit" [disabled]="!courtForm.valid" value="{{text}} pista">
+    
+</form>

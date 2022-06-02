@@ -1,0 +1,85 @@
+.article-list-users {
+    margin-top: 3rem;
+
+    .title {
+        font-size: 3em;
+        margin: 1.5rem;
+        margin-bottom: .5rem;
+    }
+
+    .search {
+        margin: 1.5rem;
+    }
+
+    .user-container {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        row-gap: 1.3rem;
+        margin-bottom: 1.3rem;
+        height: max-content;
+        min-height: 110px;
+
+        .user {
+            width: 100%;
+            background-color: $gray;
+            position: relative;
+            padding: .8rem;
+
+            .info-user {
+                display: flex;
+                flex-direction: column;
+
+                .img-and-name {
+                    display: flex;
+                    align-items: center;
+                    
+                    img {
+                        border-radius: 50%;
+                        width: 52px;
+                        height: 52px;
+                    }
+
+                    span {
+                        margin: 0 .5rem 0 1rem;
+                    }
+                }
+                
+                .num-warnings-container {
+                    margin-top: .15rem;
+                    .num-warnings {
+                        span {
+                            color: $error_red;
+                            font-size: 1.3em;
+                            font-weight: 500;
+                        }
+                    }
+                }
+            }
+
+            .square-link {
+                position: absolute;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 20%;
+                background-color: $blue;
+                cursor: pointer;
+                transition: width .2s ease, background-color .2s ease;
+
+                .icon {
+                    width: 28px;
+                    height: 28px;
+                }
+            }
+
+            &:hover .square-link {
+                width: 25%;
+                background-color: $blue_hover;
+            }
+        }
+    }
+}
