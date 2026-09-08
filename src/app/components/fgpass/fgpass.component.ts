@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
+  standalone: false,
   selector: 'app-fgpass',
   templateUrl: './fgpass.component.html',
   styleUrls: ['./fgpass.component.scss']

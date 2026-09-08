@@ -7,6 +7,7 @@ import { User } from 'src/app/models/user';
 import { Reserve } from 'src/app/models/reserve';
 
 @Component({
+  standalone: false,
   selector: 'app-listreserves',
   templateUrl: './listreserves.component.html',
   styleUrls: ['./listreserves.component.scss']

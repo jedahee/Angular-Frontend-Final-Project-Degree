@@ -11,6 +11,7 @@ import { SportService } from 'src/app/services/sport.service';
 import { ReserveService } from 'src/app/services/reserve.service';
 
 @Component({
+  standalone: false,
   selector: 'app-courts',
   templateUrl: './courts.component.html',
   styleUrls: ['./courts.component.scss']

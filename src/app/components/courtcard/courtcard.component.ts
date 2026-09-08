@@ -5,6 +5,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
+  standalone: false,
   selector: 'app-courtcard',
   templateUrl: './courtcard.component.html',
   styleUrls: ['./courtcard.component.scss']

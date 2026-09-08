@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
 
 @Component({
+  standalone: false,
   selector: 'app-detailsuser',
   templateUrl: './detailsuser.component.html',
   styleUrls: ['./detailsuser.component.scss']

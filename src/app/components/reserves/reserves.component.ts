@@ -8,6 +8,7 @@ import { CourtService } from 'src/app/services/court.service';
 import { ReserveService } from 'src/app/services/reserve.service';
 
 @Component({
+  standalone: false,
   selector: 'app-reserves',
   templateUrl: './reserves.component.html',
   styleUrls: ['./reserves.component.scss']

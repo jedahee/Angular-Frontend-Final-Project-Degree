@@ -10,6 +10,7 @@ import { SportService } from 'src/app/services/sport.service';
 import { ReserveService } from 'src/app/services/reserve.service';
 import { CommentService } from 'src/app/services/comment.service';
 @Component({
+  standalone: false,
   selector: 'app-detailscourt',
   templateUrl: './detailscourt.component.html',
   styleUrls: ['./detailscourt.component.scss']

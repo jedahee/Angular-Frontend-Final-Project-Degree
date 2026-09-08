@@ -10,6 +10,7 @@ import { Court } from 'src/app/models/court';
 import { User } from 'src/app/models/user';
 
 @Component({
+  standalone: false,
   selector: 'app-formcourt',
   templateUrl: './formcourt.component.html',
   styleUrls: ['./formcourt.component.scss']

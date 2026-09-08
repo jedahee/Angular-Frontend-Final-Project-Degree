@@ -3,6 +3,7 @@ import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
 import { Router, ActivatedRoute } from '@angular/router';
 @Component({
+  standalone: false,
   selector: 'app-updatepassword',
   templateUrl: './updatepassword.component.html',
   styleUrls: ['./updatepassword.component.scss']
