@@ -23,6 +23,7 @@
     "zone.js": "~0.16.0"
   },
   "devDependencies": {
+    "@angular/build": "^21.2.23",
     "@angular/cli": "^21.2.0",
     "@angular/compiler-cli": "^21.2.0",
     "@types/jasmine": "~5.1.0",
@@ -33,11 +34,13 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.9.0",
-    "@angular/build": "^21.2.23"
+    "typescript": "~5.9.0"
   },
   "overrides": {
     "browserslist": "^4.28.7",
-    "qs": "^6.16.0"
+    "qs": "^6.16.0",
+    "@angular/build": {
+      "undici": "^7.30.1"
+    }
   }
 }
